@@ -12,7 +12,8 @@
     "homepage": "https://github.com/ilbronza/uikittemplate",
     "keywords": ["Laravel", "UikitTemplate"],
     "require": {
-        "illuminate/support": "~7|~8"
+        "illuminate/support": "~7|~8",
+        "lavary/laravel-menu": "v1.8.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",
