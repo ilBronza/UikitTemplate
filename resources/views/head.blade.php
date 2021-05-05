@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script src="/uikittemplate/jquery/jquery.min.js"></script>
+    <script src="/uikittemplate/jquery/jquery-ui.min.js"></script>
     <script src="/uikittemplate/uikit/js/uikit.min.js"></script>
     <script src="/uikittemplate/uikit/js/uikit-icons.min.js"></script> 
 
@@ -23,8 +24,22 @@
 
     @include('crud::scripts')
     @include('datatables::scripts.mainScripts')
+    @include('formfield::scripts.scripts')
+
     @include('ukn::scripts')
 
 
+    <style type="text/css">
 
+        table.dataTable tbody a
+        {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+
+
+    @include('layouts._projectScripts')
 </head>

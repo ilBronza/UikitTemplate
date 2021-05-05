@@ -5,7 +5,10 @@
 
 <body>
 
-    @include('navbars.navbar')
+@if(empty($iframed))
+    @include('navbar.navbar')
+@endif
+
     @yield('layout.offcanvas')
 
     <div class="uk-padding-large">

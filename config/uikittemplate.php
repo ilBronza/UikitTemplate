@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'theme' => env('APP_UIKITTHEME', 'pinevood'),
+	'theme' => env('APP_UIKITTHEME', 'none'),
 
 	// 'theme' => env('APP_UIKITTHEME', 'yoosomething'),
 	// 'theme' => env('APP_UIKITTHEME', 'flow'),
