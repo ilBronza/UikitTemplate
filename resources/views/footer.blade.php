@@ -1,0 +1,1 @@
+@include('layouts._projectScriptsFooter')
