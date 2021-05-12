@@ -3,6 +3,8 @@
 return [
 	'theme' => env('APP_UIKITTHEME', 'none'),
 
+	'logo' => env('APP_LOGO'),
+
 	// 'theme' => env('APP_UIKITTHEME', 'yoosomething'),
 	// 'theme' => env('APP_UIKITTHEME', 'flow'),
 	// 'theme' => env('APP_UIKITTHEME', 'designescapes'),

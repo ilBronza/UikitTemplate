@@ -5,13 +5,13 @@
 
 <body>
 
-@if(empty($iframed))
+@if(empty($iframed)&&isset($currentUser))
     @include('navbar.navbar')
 @endif
 
     @yield('layout.offcanvas')
 
-    <div class="uk-padding-large">
+    <div class="uk-padding-small">
 
     	@include('uikittemplate::models._parentModel')
 

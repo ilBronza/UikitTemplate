@@ -23,10 +23,6 @@ class UikitTemplateServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
-
-        $this->publishes([
-            __DIR__.'/../public' => public_path('uikittemplate/'),
-        ], 'uikittemplate');
     }
 
     /**
@@ -41,6 +37,10 @@ class UikitTemplateServiceProvider extends ServiceProvider
         // Register the service the package provides.
         $this->app->singleton('uikittemplate', function ($app) {
             return new UikitTemplate;
+        });
+
+        $this->app->singleton('uikitmenu', function ($app) {
+            return new Menu();
         });
 
         // $this->app->singleton(Menu::class, function ($app) {
@@ -83,9 +83,11 @@ class UikitTemplateServiceProvider extends ServiceProvider
         ], 'uikittemplate.views');*/
 
         // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/ilbronza'),
-        ], 'uikittemplate.views');*/
+        $this->publishes([
+            __DIR__.'/../public' => public_path('uikittemplate/'),
+            __DIR__.'/../resources/js' => base_path('resources/js'),
+            __DIR__.'/../resources/sass' => base_path('resources/sass')
+        ], 'uikittemplate.assets');
 
         // Publishing the translation files.
         /*$this->publishes([

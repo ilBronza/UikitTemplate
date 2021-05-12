@@ -15,6 +15,42 @@ Via Composer
 $ composer require ilbronza/uikittemplate
 ```
 
+
+add this lines to package.json dependencies list
+
+``` bash
+"uikit": "^3.6.21",
+"uikit-icons": "^0.5.0",
+"@fortawesome/fontawesome-free": "^5.15.3",
+```
+
+run npm install from terminal
+
+``` bash
+npm install
+```
+
+add these line to resources/js/app.js to include the required modules
+``` bash
+require('./ilBronza.ajaxFetchers.js');
+```
+
+
+publish the package assets
+
+``` bash
+php artisan vendor:publish --force --tag "uikittemplate.assets"
+```
+
+
+compile the file with laravel-mix
+
+``` bash
+npm run development
+```
+
+
+
 ## Usage
 
 ## Change log
