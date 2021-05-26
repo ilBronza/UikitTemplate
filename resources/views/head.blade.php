@@ -19,10 +19,11 @@
 
     </script>
 
-    @include('formfield::scripts.scripts')
+    <title>{{ UikitTemplate::getPageTitle() }}</title>
+
+@include('formfield::scripts.scripts')
 
     @include('ukn::scripts')
-
     <style type="text/css">
 
         .uk-tooltip

@@ -15,6 +15,7 @@ import Icons from 'uikit/dist/js/uikit-icons';
 window.UIkit = UIkit;
 UIkit.use(Icons);
 
+require('select2');
 
 require( './ilBronza.ajaxFetchers.js' );
 

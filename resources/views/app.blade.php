@@ -5,7 +5,7 @@
 
 <body>
 
-@if(empty($iframed)&&isset($currentUser))
+@if(empty($iframed)&& ! empty($currentUser)&&($currentUser->id != null))
     @include('navbar.navbar')
 @endif
 
