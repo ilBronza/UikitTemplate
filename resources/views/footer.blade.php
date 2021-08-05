@@ -1,1 +1,1 @@
-@include('layouts._projectScriptsFooter')
+@includeIf('layouts._projectScriptsFooter')

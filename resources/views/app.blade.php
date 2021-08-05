@@ -3,9 +3,13 @@
 
 @include('uikittemplate::head')
 
+
+
+<script type="text/javascript" src="/js/ilbronza.crud.min.js"></script>
+
 <body>
 
-@if(empty($iframed)&& ! empty($currentUser)&&($currentUser->id != null))
+@if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')
 @endif
 

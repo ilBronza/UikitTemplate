@@ -21,7 +21,7 @@
 
     <title>{{ UikitTemplate::getPageTitle() }}</title>
 
-@include('formfield::scripts.scripts')
+    @include('formfield::scripts.scripts')
 
     @include('ukn::scripts')
     <style type="text/css">
@@ -33,13 +33,22 @@
 
         table.dataTable tbody a
         {
-            display: block;
-            overflow: hidden;
+            display: inline-block;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
+        table.dataTable tbody a:not('.uk-icon')
+        {
+            overflow: hidden;            
+        }
+
+        .uk-accordion-title::before
+        {
+            float: left;
+        }
     </style>
 
+    @includeIf('layouts._projectScripts')
 
-    @include('layouts._projectScripts')
 </head>
