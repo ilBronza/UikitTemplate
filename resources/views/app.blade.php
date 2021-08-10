@@ -9,6 +9,9 @@
 
 <body>
 
+	    <h1>{{ Route::currentRouteName() }}</h1>
+
+
 @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')
 @endif
@@ -16,8 +19,6 @@
     @yield('layout.offcanvas')
 
     <div class="uk-padding-small">
-
-    	@include('uikittemplate::models._parentModel')
 
         @yield('content')
 
