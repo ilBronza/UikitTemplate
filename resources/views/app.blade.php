@@ -3,10 +3,6 @@
 
 @include('uikittemplate::head')
 
-
-
-<script type="text/javascript" src="/js/ilbronza.crud.min.js"></script>
-
 <body>
 
 	    <h1>{{ Route::currentRouteName() }}</h1>
