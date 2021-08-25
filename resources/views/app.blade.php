@@ -5,9 +5,6 @@
 
 <body>
 
-	    <h1>{{ Route::currentRouteName() }}</h1>
-
-
 @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')
 @endif
