@@ -9,6 +9,8 @@
     @include('navbar.navbar')
 @endif
 
+	@includeIf('layouts.projectSpecificHeader')
+
     @yield('layout.offcanvas')
 
     <div class="uk-padding-small">
@@ -17,6 +19,7 @@
 
     </div>
 
+	@includeIf('layouts.projectSpecificFooter')
     @include('uikittemplate::footer')
 
 </body>
