@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'theme' => env('APP_UIKITTHEME', 'own'),
+	// 'theme' => env('APP_UIKITTHEME', 'own'),
 
 	'logo' => env('APP_LOGO'),
 

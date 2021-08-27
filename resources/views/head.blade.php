@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/css/app.css"/>
 
     <link rel="stylesheet" type="text/css" href="/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/own.css"/>
 
     <script type="text/javascript">
 
