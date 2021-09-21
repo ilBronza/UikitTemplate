@@ -3,7 +3,7 @@
 
 @include('uikittemplate::head')
 
-<body>
+<body class="{{ UikitTemplate::getBodyClass() }}">
 
 @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')
@@ -18,6 +18,8 @@
         @yield('content')
 
     </div>
+
+	@include('uikittemplate::utilities.__extraViews', ['position' => 'bottom'])
 
 	@includeIf('layouts.projectSpecificFooter')
     @include('uikittemplate::footer')

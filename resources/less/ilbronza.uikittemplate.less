@@ -1,0 +1,38 @@
+body .uk-description-list dt
+{
+	font-weight: bold;
+}
+
+.ib-horizontal-description-list
+{
+	width: 100%;
+	float: left;
+	clear: both;
+
+	dd,
+	dt
+	{
+		float: left;
+		margin: 0!important;
+	}
+
+	dt
+	{
+		clear: left;
+		width: 50%;
+		max-width: 220px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		&:after
+		{
+			content: ':';			
+		}
+	}
+
+	dd
+	{
+		clear: right;
+	}
+}

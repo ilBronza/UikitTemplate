@@ -2,12 +2,19 @@
 
 namespace IlBronza\UikitTemplate;
 
+use Illuminate\Support\Str;
+
 class UikitTemplate
 {
 	public function getNavbars()
 	{
 		return collect();
 	}
+
+    static function getBodyClass()
+    {
+        return Str::slug(static::getPageTitle());
+    }
 
     static function getPageTitle()
     {

@@ -78,14 +78,15 @@ class UikitTemplateServiceProvider extends ServiceProvider
         ], 'uikittemplate.config');
 
         // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/ilbronza'),
-        ], 'uikittemplate.views');*/
+        $this->publishes([
+            __DIR__.'/../resources/views' => base_path('resources/views'),
+        ], 'uikittemplate.views');
 
         // Publishing assets.
         $this->publishes([
             __DIR__.'/../public' => public_path('uikittemplate/'),
             __DIR__.'/../resources/js' => base_path('resources/js'),
+            __DIR__.'/../resources/less' => base_path('resources/less'),
             __DIR__.'/../resources/sass' => base_path('resources/sass')
         ], 'uikittemplate.assets');
 
