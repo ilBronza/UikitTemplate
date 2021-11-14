@@ -5,6 +5,13 @@
 
 <body class="{{ UikitTemplate::getBodyClass() }}">
 
+<style type="text/css">
+input[type=datetime-local]::-webkit-calendar-picker-indicator
+{
+  margin-left: 0px;
+  background-color: transparent!important;
+}	
+</style>
 @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')
 @endif

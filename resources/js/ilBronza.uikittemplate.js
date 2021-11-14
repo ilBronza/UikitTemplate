@@ -18,4 +18,5 @@ UIkit.use(Icons);
 require('select2');
 
 require( './ilBronza.ajaxFetchers.js' );
+require( './ilBronza.uikittemplate.utilities.js' );
 
