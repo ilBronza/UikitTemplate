@@ -4,6 +4,7 @@
 @include('uikittemplate::head')
 
 <body class="{{ UikitTemplate::getBodyClass() }}">
+  @include('uikittemplate::utilities.concurrentUri.headerbar')
 
 <style type="text/css">
 input[type=datetime-local]::-webkit-calendar-picker-indicator
@@ -15,6 +16,8 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator
 @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')
 @endif
+
+@include('formfield::scripts')
 
 	@includeIf('layouts.projectSpecificHeader')
 
@@ -31,5 +34,7 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator
 	@includeIf('layouts.projectSpecificFooter')
     @include('uikittemplate::footer')
 
+
+  @include('uikittemplate::utilities.concurrentUri.scripts')
 </body>
 </html>

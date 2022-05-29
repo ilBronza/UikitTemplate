@@ -39,7 +39,7 @@
             white-space: nowrap;
         }
 
-        table.dataTable tbody a:not('.uk-icon')
+        table.dataTable tbody a:not(.uk-icon)
         {
             overflow: hidden;            
         }

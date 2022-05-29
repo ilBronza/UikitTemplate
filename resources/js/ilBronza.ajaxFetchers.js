@@ -81,6 +81,54 @@ jQuery(document).ready(function($)
         return fetchUrl.replace(window.replace_model_id_string, replacingId);
     }
 
+    $('body').on('click', '.clicktoclose', function (e)
+    {
+        $(this).remove();
+    });
+
+    UIkit.util.on(document, 'beforehide', '.uk-tooltip.uk-active', function(e)
+    {
+        if($(e.srcElement).hasClass('clicktoclose'))
+          e.preventDefault();
+    });
+
+    $('body').on('dblclick', '.clickfetchertooltip', function (e)
+    {
+        var fetchUrl = window.getTooltipFetchUrl(this);
+        var target = this;
+        fetch(fetchUrl).then(function (response)
+        {
+            return response.text();
+        }).then(function (html)
+        {
+            UIkit.tooltip(target,
+            {
+                title: html,
+                cls: 'uk-active clicktoclose'
+            }).show();
+        });
+    });
+
+    $('body').on('dblclick', '.clickfetchermodal', function (e)
+    {
+        var fetchUrl = window.getTooltipFetchUrl(this);
+        var target = this;
+        fetch(fetchUrl).then(function (response)
+        {
+            return response.text();
+        }).then(function (html)
+        {
+            UIkit.modal.dialog(html);
+            // UIkit.lightboxPanel(html).show();
+
+            // UIkit.tooltip(target,
+            // {
+            //     title: html,
+            //     cls: 'uk-active clicktoclose'
+            // }).show();
+        });
+    });
+
     $('body').on('mouseenter', '.hoverfetchertooltip', function(e)
     {
         let fetchUrl = window.getTooltipFetchUrl(this);
