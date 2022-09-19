@@ -32,4 +32,41 @@ class UikitTemplate
 
         return implode(" | ", $title);
     }
+
+    public function getViewFolderName()
+    {
+        return 'uikit';
+    }
+
+    public function getNavbarPositionClass(string $position = null)
+    {
+        if(! $position)
+            return null;
+
+        return "uk-navbar-{$position}";
+    }
+
+    public function getFlexWrapClass($type = 'wrap')
+    {
+        $result = ['uk-flex'];
+
+        if($type == 'wrap')
+            $result[] = 'uk-flex-wrap';
+
+        if($type == 'reverse')
+            $result[] = 'uk-flex-wrap-reverse';
+
+        if($type == 'nowrap')
+            $result[] = 'uk-flex-nowrap';
+
+        if(in_array($type, ['stretch', 'between', 'around', 'top', 'middle', 'bottom']))
+            $result[] = "uk-flex-wrap uk-flex-{$type}";
+
+        return implode(" ", $result);
+    }
+
+    public function getWidthFullClass()
+    {
+        return 'uk-width-1-1';
+    }
 }

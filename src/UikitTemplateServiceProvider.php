@@ -2,8 +2,9 @@
 
 namespace IlBronza\UikitTemplate;
 
+use IlBronza\Menu\Menu;
+use IlBronza\Menu\Navbar;
 use Illuminate\Support\ServiceProvider;
-use Lavary\Menu\Menu;
 
 class UikitTemplateServiceProvider extends ServiceProvider
 {
@@ -39,8 +40,12 @@ class UikitTemplateServiceProvider extends ServiceProvider
             return new UikitTemplate;
         });
 
-        $this->app->singleton('uikitmenu', function ($app) {
+        $this->app->singleton('menu', function ($app) {
             return new Menu();
+        });
+
+        $this->app->bind('navbar', function ($app) {
+            return new Navbar();
         });
 
         // $this->app->singleton(Menu::class, function ($app) {

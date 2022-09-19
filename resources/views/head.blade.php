@@ -20,7 +20,7 @@
 
     </script>
 
-    <title>{{ UikitTemplate::getPageTitle() }}</title>
+    <title>{{ app('uikittemplate')->getPageTitle() }}</title>
 
     @include('formfield::scripts.scripts')
 

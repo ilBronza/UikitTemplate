@@ -3,7 +3,7 @@
 
 @include('uikittemplate::head')
 
-<body class="{{ UikitTemplate::getBodyClass() }}">
+<body class="{{ app('uikittemplate')->getBodyClass() }}">
   @include('uikittemplate::utilities.concurrentUri.headerbar')
 
 <style type="text/css">
@@ -13,10 +13,54 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator
   background-color: transparent!important;
 }	
 </style>
-@if(empty($iframed)&& Auth::id())
+
+<script type="text/javascript">
+
+window.ibFetcherFetch = function (target)
+{
+  console.log(target);
+}
+
+window.ibInitializeFetcher = function (target)
+{
+  let event = target.data('event', false);
+
+  console.log(event);
+
+  target.on('load', function()
+  {
+    alert('asd');
+    $.ajax({
+      url: target.data('url'),
+      success: function (response)
+      {
+        target.html(response);
+      }
+    });
+  })
+
+  // if(event)
+  //   target.on(event, window.ibFetcherFetch(target));
+
+  // else
+  //   window.ibFetcherFetch(target);
+}
+
+jQuery(document).ready(function($)
+{
+  $('.ibfetcher').each(function()
+  {
+    window.ibInitializeFetcher($(this));
+  });
+})
+</script>
+
+{!! app('menu')->render() !!}
+
+{{-- @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')
 @endif
-
+ --}}
 @include('formfield::scripts')
 
 	@includeIf('layouts.projectSpecificHeader')
