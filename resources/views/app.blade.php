@@ -27,6 +27,39 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator
 }
 </style>
 
+<script type="text/javascript">
+jQuery(document).ready(function($)
+{
+  $('body').on('change', '.charttype', function ()
+  {
+    let chartid = $(this).data('chartid');
+    let chartName = 'myChart' + chartid;
+
+    let chartOptionsName;
+
+    let type = $(this).val();
+
+    if((type == 'pie')||(type == 'doughnut'))
+      chartOptionsName = 'pieChartOptions' + chartid;
+    else
+      chartOptionsName = 'chartOptions' + chartid;
+
+    if(window[chartName])
+      window[chartName].destroy();
+
+    var ctx = document.getElementById(chartid).getContext("2d");
+
+    var temp = jQuery.extend(true, {}, window[chartOptionsName]);
+    temp.type = type;
+
+    window[chartName] = new Chart(ctx, temp);
+  });
+});
+
+</script>
+
+
+
 
 
 
