@@ -14,43 +14,131 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator
 }	
 </style>
 
+
+<style type="text/css">
+.ibfetchercontainer
+{
+  position: relative;
+}
+
+.ibfetcherbuttons .spinner
+{
+  display: none;
+}
+</style>
+
+
+
+
 <script type="text/javascript">
 
-window.ibFetcherFetch = function (target)
+window.ibFetcherSpin = function(target)
 {
-  console.log(target);
+  var id = $(target).attr('id');
+
+  console.log('spinno');
+  $('fetcherbuttons-' + id).find('.spinner').css('display', 'block');
+  $('fetcherbuttons-' + id).find('a.refresh').css('display', 'none');
 }
+
+window.ibFetcherStopSpinning = function(target)
+{
+  var id = $(target).attr('id');
+
+  console.log('DEspinno');
+  $('fetcherbuttons-' + id).find('.spinner').css('display', 'none');
+  $('fetcherbuttons-' + id).find('a.refresh').css('display', 'inline');
+}
+
+window.ibFetcherCollectData = function(target)
+{
+  var id = $(target).attr('id');
+
+  var fieldContainer = $('.ibfetcherfields.' + id);
+
+  if(! fieldContainer.length)
+    return null;
+
+  var data = {};
+
+  $(fieldContainer).find('input').each(function ()
+  {
+    var name = $(this).attr('name');
+    var value = $(this).val();
+
+    data[name] = value;
+  });
+
+  return data;
+}
+
+window.ibFetcherFetch = function (target, warn = false)
+{
+  window.ibFetcherSpin(target);
+
+  let id = $(target).attr('id');
+  let event = $(target).data('event');
+  let url = $(target).data('url');
+
+  let data = window.ibFetcherCollectData(target);
+
+  $.ajax({
+    url: url,
+    data: data,
+    success: function (response)
+    {
+      $('.fetchercontainer.' + id).html(response);
+
+      $(target).data('loaded', true);
+      window.ibFetcherStopSpinning(target);
+
+      if(warn)
+      {
+        let title = $(target).data('title');
+
+        if(! title)
+          title = 'Elemento';
+
+        window.addSuccessNotification(title + ' caricato con successo');
+      }
+    },
+    error: function(response)
+    {
+      let title = $(target).data('title');
+
+      if(! title)
+        title = 'Elemento';
+
+      window.addDangerNotification('Caricamento di ' + title + ' interrotto');
+      window.ibFetcherStopSpinning(target);      
+    }
+  });
+}
+
+
 
 window.ibInitializeFetcher = function (target)
 {
-  let event = target.data('event', false);
+  if($(target).data('loaded'))
+    return ;
 
-  console.log(event);
-
-  target.on('load', function()
-  {
-    alert('asd');
-    $.ajax({
-      url: target.data('url'),
-      success: function (response)
-      {
-        target.html(response);
-      }
-    });
-  })
-
-  // if(event)
-  //   target.on(event, window.ibFetcherFetch(target));
-
-  // else
-  //   window.ibFetcherFetch(target);
+  window.ibFetcherFetch(target);
 }
 
-jQuery(document).ready(function($)
+$(window).on('load', function ()
 {
   $('.ibfetcher').each(function()
   {
     window.ibInitializeFetcher($(this));
+  });
+
+  $('.ibfetcherbuttons .refresh').on('click', function()
+  {
+    var container = $(this).parents('.ibfetcherbuttons');
+    var id = $(container).data('id');
+    let target = $('#' + id);
+
+    window.ibFetcherFetch(target, true);
   });
 })
 </script>
