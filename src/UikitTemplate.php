@@ -6,6 +6,11 @@ use Illuminate\Support\Str;
 
 class UikitTemplate
 {
+    public function getTemplateName()
+    {
+        return config('uikittemplate.template', 'uikit');
+    }
+
 	public function getNavbars()
 	{
 		return collect();
