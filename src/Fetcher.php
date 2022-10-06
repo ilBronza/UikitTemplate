@@ -14,6 +14,7 @@ class Fetcher
     public $url;
     public $title;
     public $id;
+    public $canExpand = false;
 
     public $fields;
 
@@ -22,23 +23,16 @@ class Fetcher
         $uash = $parameters;
         $parameters = $this->manageFields($parameters);
 
-        try
-        {
-            foreach($parameters as $name => $value)
-                $this->$name = $value;            
-        }
-        catch(\Exception $e)
-        {
-            dd($uash);
-        }
+        foreach($parameters as $name => $value)
+            $this->$name = $value;            
     }
 
-    private function manageFields(array $parameters)
+    private function manageFields(array $parameters) : array
     {
         $this->fields = collect();
 
         if(! $fields = ($parameters['fields'] ?? false))
-            return ;
+            return $parameters;
 
         foreach($fields as $field)
             $this->addField($field);
@@ -95,6 +89,11 @@ class Fetcher
         return $this->renderType('_fetcherCard');
     }
 
+    public function renderPageCard()
+    {
+        return $this->renderType('_fetcherPageCard');
+    }
+
     public function addField(FormField $formField)
     {
         $this->fields->push($formField);
@@ -108,5 +107,15 @@ class Fetcher
     public function getFields() : Collection
     {
         return $this->fields;
+    }
+
+    public function setCanExpand(bool $canExpand)
+    {
+        $this->canExpand = $canExpand;
+    }
+
+    public function canExpand() : bool
+    {
+        return !! $this->canExpand;
     }
 }

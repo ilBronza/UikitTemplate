@@ -148,6 +148,19 @@ window.ibFetcherFetch = function (target, warn = false)
   });
 }
 
+window.ibFetcherExpand = function (target, warn = false)
+{
+  let url = new URL($(target).data('url'));
+
+  url.searchParams.append('fullpagechart', true);
+
+  let data = window.ibFetcherCollectData(target);
+
+  for (var key in data)
+    url.searchParams.append(key, data[key]);
+
+  window.open(url);
+}
 
 
 window.ibInitializeFetcher = function (target)
@@ -172,6 +185,15 @@ $(window).on('load', function ()
     let target = $('#' + id);
 
     window.ibFetcherFetch(target, true);
+  });
+
+  $('.ibfetcherbuttons .expand').on('click', function()
+  {
+    var container = $(this).parents('.ibfetcherbuttons');
+    var id = $(container).data('id');
+    let target = $('#' + id);
+
+    window.ibFetcherExpand(target, true);
   });
 })
 </script>
