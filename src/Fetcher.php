@@ -27,6 +27,20 @@ class Fetcher
             $this->$name = $value;            
     }
 
+    public function setTitle(string $title) : self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function setUrl(string $url) : self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
     private function manageFields(array $parameters) : array
     {
         $this->fields = collect();

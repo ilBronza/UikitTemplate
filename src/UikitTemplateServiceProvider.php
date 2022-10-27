@@ -4,6 +4,7 @@ namespace IlBronza\UikitTemplate;
 
 use IlBronza\Menu\Menu;
 use IlBronza\Menu\Navbar;
+use IlBronza\UikitTemplate\Fetcher;
 use Illuminate\Support\ServiceProvider;
 
 class UikitTemplateServiceProvider extends ServiceProvider
@@ -46,6 +47,10 @@ class UikitTemplateServiceProvider extends ServiceProvider
 
         $this->app->bind('navbar', function ($app) {
             return new Navbar();
+        });
+
+        $this->app->bind('fetcher', function ($app) {
+            return new Fetcher();
         });
 
         // $this->app->singleton(Menu::class, function ($app) {
