@@ -2,6 +2,7 @@
 
 namespace IlBronza\UikitTemplate;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class UikitTemplate
@@ -28,7 +29,15 @@ class UikitTemplate
 
         $parameters = request()->route()->parameters();
 
-        $title = [trans('routes.' . request()->route()->getName(), $parameters)];
+        $routeParameters = [];
+
+        foreach($parameters as $name => $parameter)
+            if ($parameter instanceof Model)
+                $routeParameters[$name] = $parameter->getName();
+            else
+                $routeParameters[$name] = $parameter;
+
+        $title = [trans('routes.' . request()->route()->getName(), $routeParameters)];
 
         foreach($parameters as $name => $parameter)
             if(! is_string($parameter))

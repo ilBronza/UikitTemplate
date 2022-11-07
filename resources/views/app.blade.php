@@ -198,7 +198,9 @@ $(window).on('load', function ()
 })
 </script>
 
-{!! app('menu')->render() !!}
+@if(empty($iframed)&& Auth::id())
+  {!! app('menu')->render() !!}
+@endif
 
 {{-- @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')

@@ -34,6 +34,8 @@ class UikitTemplateServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        require_once __DIR__ . '/Helpers/uikittemplateHelper.php';
+
         $this->mergeConfigFrom(__DIR__.'/../config/uikittemplate.php', 'uikittemplate');
 
         // Register the service the package provides.
