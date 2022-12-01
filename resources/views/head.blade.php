@@ -41,7 +41,7 @@
 
         table.dataTable tbody a:not(.uk-icon)
         {
-            overflow: hidden;            
+            overflow: hidden;
         }
 
         .uk-accordion-title::before
