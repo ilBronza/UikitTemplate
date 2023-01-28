@@ -6,12 +6,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="/js/app.js"></script>
+    <script src="/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
 
-    <link rel="stylesheet" type="text/css" href="/css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 
-    <link rel="stylesheet" type="text/css" href="/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/own.css"/>
+    <link rel="stylesheet" type="text/css" href="/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
+    <link rel="stylesheet" type="text/css" href="/css/own.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 
     <script type="text/javascript">
 

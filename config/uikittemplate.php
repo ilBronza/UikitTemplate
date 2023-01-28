@@ -3,6 +3,8 @@
 return [
 	// 'theme' => env('APP_UIKITTHEME', 'own'),
 
+	'version' => '1.0.1',
+
 	'logo' => env('APP_LOGO'),
 
 	'theme' => env('APP_UIKITTHEME', 'yoosomething'),

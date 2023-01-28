@@ -58,13 +58,6 @@ class UikitTemplateServiceProvider extends ServiceProvider
         // $this->app->singleton(Menu::class, function ($app) {
         //     return new Menu([config('laravel-menu.settings'), config('laravel-menu.views')] );
         // });
-
-        // $this->app->make('MyNavBar', function ($menu) {
-        //     $menu->add('Home');
-        //     $menu->add('About', 'about');
-        //     $menu->add('Services', 'services');
-        //     $menu->add('Contact', 'contact');
-        // });
     }
 
     /**

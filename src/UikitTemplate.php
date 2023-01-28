@@ -2,6 +2,7 @@
 
 namespace IlBronza\UikitTemplate;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -19,7 +20,10 @@ class UikitTemplate
 
     static function getBodyClass()
     {
-        return Str::slug(static::getPageTitle());
+        if(! Auth::id())
+            return Str::slug(static::getPageTitle());
+
+        return "user" . Auth::id() . " " . Str::slug(static::getPageTitle());
     }
 
     static function getPageTitle()
