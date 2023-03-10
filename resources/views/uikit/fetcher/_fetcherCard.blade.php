@@ -2,10 +2,14 @@
 	<div class="uk-card-header">
 
 		@if($title = $fetcher->getTitle())
+		<div class="uk-display-inline-block uk-float-left fetchertitle">
 			{!! $title !!}
+		</div>
 		@endif
+		<div class="uk-align-right">
+			@include('uikittemplate::uikit.fetcher.__buttons')			
+		</div>
 
-		@include('uikittemplate::uikit.fetcher.__buttons')
 
 	</div>
 	<div class="uk-card-body">

@@ -2,6 +2,7 @@
 
 namespace IlBronza\UikitTemplate;
 
+use IlBronza\Buttons\Button;
 use IlBronza\FormField\FormField;
 use IlBronza\UikitTemplate\Traits\UseTemplateTrait;
 use Illuminate\Support\Collection;
@@ -23,8 +24,22 @@ class Fetcher
         $uash = $parameters;
         $parameters = $this->manageFields($parameters);
 
+        $this->buttons = collect();
+
+        $this->setParameters($parameters);
+    }
+
+    public function setParameters(array $parameters)
+    {
+        if($parameters['buttons'] ?? false)
+        {
+            $this->addButtons($parameters['buttons']);
+
+            unset($parameters['buttons']);
+        }
+
         foreach($parameters as $name => $value)
-            $this->$name = $value;            
+            $this->$name = $value;
     }
 
     public function setTitle(string $title) : self
@@ -32,6 +47,24 @@ class Fetcher
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getButtons() : Collection
+    {
+        return $this->buttons;
+    }
+
+    public function addButtons(Collection|array $buttons)
+    {
+        foreach($buttons as $button)
+            $this->addButton($button);
+    }
+
+    public function addButton(Button $button)
+    {
+        $this->buttons->push(
+            $button
+        );
     }
 
     public function setUrl(string $url) : self
