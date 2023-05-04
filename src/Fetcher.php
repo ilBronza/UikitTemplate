@@ -17,6 +17,8 @@ class Fetcher
     public $id;
     public $canExpand = false;
 
+    public $refresh = true;
+
     public $fields;
 
     public function __construct(array $parameters = [])
@@ -47,6 +49,16 @@ class Fetcher
         $this->title = $title;
 
         return $this;
+    }
+
+    public function hasRefresh()
+    {
+        return $this->refresh;
+    }
+
+    public function setRefresh(bool $refresh)
+    {
+        return $this->refresh = $refresh;
     }
 
     public function getButtons() : Collection

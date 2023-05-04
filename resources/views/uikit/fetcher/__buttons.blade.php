@@ -3,7 +3,10 @@
 	{!! $button->render() !!}
 	@endforeach
 
-	<a class="refresh" href="javascript:void(0)" uk-icon="icon: refresh"></a>
+	@if($fetcher->hasRefresh())
+		<a class="refresh" href="javascript:void(0)" uk-icon="icon: refresh"></a>
+	@endif
+
 	<div class="spinner" uk-spinner="{ratio: 1}"></div>
 
 	@if($fetcher->canExpand())
