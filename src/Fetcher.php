@@ -16,6 +16,7 @@ class Fetcher
     public $title;
     public $id;
     public $canExpand = false;
+    public $autoRefreshSeconds;
 
     public $refresh = true;
 
