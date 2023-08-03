@@ -21,9 +21,40 @@ class UikitTemplate
     static function getBodyClass()
     {
         if(! Auth::id())
-            return Str::slug(static::getPageTitle());
+            return Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
 
-        return "user" . Auth::id() . " " . Str::slug(static::getPageTitle());
+        return "user" . Auth::id() . " " . Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
+    }
+
+    static function getPageClass()
+    {
+        if(request()->ajax())
+            return ;
+
+        $parameters = request()->route()->parameters();
+
+        $routeParameters = [];
+
+        foreach($parameters as $name => $parameter)
+            if ($parameter instanceof Model)
+                $routeParameters[$name] = $parameter->getName();
+            else
+                $routeParameters[$name] = $parameter;
+
+        $key = 'pageClasses.' . request()->route()->getName();
+        $translated = trans($key, $routeParameters);
+
+        if($key == $translated)
+            return null;
+
+        $title = [$translated];
+
+        foreach($parameters as $name => $parameter)
+            if(! is_string($parameter))
+                if($_title = $parameter->getBrowserTitle())
+                    $title[] = $_title;
+
+        return implode(" | ", $title);
     }
 
     static function getPageTitle()
