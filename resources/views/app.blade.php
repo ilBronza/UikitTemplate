@@ -30,6 +30,34 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator
 <script type="text/javascript">
 jQuery(document).ready(function($)
 {
+  console.log('this happens because when select multiple is empty, the system doesn\'t load the select name as null. This means that you can\'t empty a relation if you send nothing');
+
+  window.convertNullMultipleSelectToNullValue = function (form, target)
+  {
+    $(target).prop('disabled', true);
+    let flatname = $(target).data('flatname');
+
+    $(form).append('<input type="hidden" value="" name="' + flatname + '" />');
+  }
+
+  $('body').on('submit', 'form', function(e)
+  {
+    var form = this;
+
+    $(this).find('select').each(function()
+    {
+      if($(this).prop('multiple'))
+      {
+        if($(this).val().length == 0)
+          window.convertNullMultipleSelectToNullValue(form, this);
+
+        else if($(this).val().length == 1)
+          if(($(this).val()[0] === '')||($(this).val()[0] === null)||(typeof $(this).val()[0] === 'undefined'))
+            window.convertNullMultipleSelectToNullValue(form, this);
+      }
+    });
+  });
+
   $('body').on('change', '.charttype', function ()
   {
     let chartid = $(this).data('chartid');

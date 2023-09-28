@@ -12,6 +12,7 @@
     "homepage": "https://github.com/ilbronza/uikittemplate",
     "keywords": ["Laravel", "UikitTemplate"],
     "require": {
+        "jenssegers/agent": "^2.6"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",
