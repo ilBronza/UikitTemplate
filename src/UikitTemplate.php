@@ -18,10 +18,15 @@ class UikitTemplate
 		return collect();
 	}
 
+    public function getContainerClass()
+    {
+        return 'uk-padding-small ibcontainer';
+    }
+
     static function getBodyClass()
     {
         if(! Auth::id())
-            return Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
+            return "guest " . Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
 
         return "user" . Auth::id() . " " . Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
     }

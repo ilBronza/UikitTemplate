@@ -119,13 +119,24 @@ jQuery(document).ready(function($)
         }).then(function (html)
         {
             UIkit.modal.dialog(html);
-            // UIkit.lightboxPanel(html).show();
+        });
+    });
 
-            // UIkit.tooltip(target,
-            // {
-            //     title: html,
-            //     cls: 'uk-active clicktoclose'
-            // }).show();
+    $('body').on('mouseenter', '.hoverfetchermodal', function(e)
+    {
+        let fetchUrl = window.getTooltipFetchUrl(this);
+
+        let target = this;
+
+        fetch(fetchUrl).then(function (response)
+        {
+            return response.text();
+        }).then(function (html)
+        {
+            UIkit.tooltip(target,
+            {
+                title: html
+            }).show();
         });
     });
 
@@ -142,6 +153,6 @@ jQuery(document).ready(function($)
                     title : html
                 }).show();
             });
-    })
+    });
 
 });

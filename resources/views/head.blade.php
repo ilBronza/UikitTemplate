@@ -8,6 +8,8 @@
 
     <script src="/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
 
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
     <link rel="stylesheet" type="text/css" href="/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 
     <link rel="stylesheet" type="text/css" href="/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
