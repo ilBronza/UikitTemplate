@@ -18,6 +18,10 @@ class Fetcher
     public $canExpand = false;
     public $autoRefreshSeconds;
 
+    public Collection $titleHtmlClasses;
+
+    public $card;
+
     public $refresh = true;
 
     public $fields;
@@ -50,6 +54,40 @@ class Fetcher
         $this->title = $title;
 
         return $this;
+    }
+
+    public function setHtmlClasses(mixed $htmlClasses) : self
+    {
+        $this->htmlClasses = collect($htmlClasses);
+
+        return $this;
+    }
+
+    public function setTitleHtmlClasses(mixed $htmlClasses) : self
+    {
+        $this->titleHtmlClasses = collect($htmlClasses);
+
+        return $this;
+    }
+
+    public function getTitleHtmlClasses() : Collection
+    {
+        return $this->titleHtmlClasses ?? collect();
+    }
+
+    public function getTitleHtmlClassesString() : string
+    {
+        return $this->getTitleHtmlClasses()->implode(' ');
+    }
+
+    public function getHtmlClasses() : Collection
+    {
+        return $this->htmlClasses ?? collect();
+    }
+
+    public function getHtmlClassesString() : string
+    {
+        return $this->getHtmlClasses()->implode(' ');
     }
 
     public function hasRefresh()
@@ -139,8 +177,23 @@ class Fetcher
         return view($viewName, ['fetcher' => $this])->render();        
     }
 
+    public function mustRenderAsCard() : bool
+    {
+        return !! $this->card;
+    }
+
+    public function setCard($card = true) : static
+    {
+        $this->card = $card;
+
+        return $this;
+    }
+
     public function render()
     {
+        if($this->mustRenderAsCard())
+            return $this->renderCard();
+
         return $this->renderType('_fetcher');
     }
 

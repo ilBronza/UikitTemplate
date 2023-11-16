@@ -1,8 +1,8 @@
-<div id="fetchercontainer{{ $fetcher->getId() }}" class="ibfetchercontainer uk-card uk-card-small">
+<div id="fetchercontainer{{ $fetcher->getId() }}" class="ibfetchercontainer uk-card uk-card-small {{ $fetcher->getHtmlClassesString() }}">
 	<div class="uk-card-header">
 
 		@if($title = $fetcher->getTitle())
-		<div class="uk-display-inline-block uk-float-left fetchertitle">
+		<div class="uk-display-inline-block uk-float-left fetchertitle {{ $fetcher->getTitleHtmlClassesString() }}">
 			{!! $title !!}
 		</div>
 		@endif

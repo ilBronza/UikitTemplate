@@ -148,6 +148,17 @@ window.ibFetcherFetch = function (target, warn = false)
     data: data,
     success: function (response)
     {
+      if(response == '')
+      {
+        $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'none');
+        $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'none');
+      }
+      else
+      {
+        $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'block');
+        $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'block');
+      }
+
       $('.fetchercontainer.' + id).html(response);
 
       $(target).data('loaded', true);
