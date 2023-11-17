@@ -62,6 +62,11 @@ class UikitTemplate
         return implode(" | ", $title);
     }
 
+    static function getTranslationKey() : string
+    {
+        return request()->route()->action['routeTranslationPrefix'] ?? 'routes.';
+    }
+
     static function getPageTitle()
     {
         if(request()->ajax())
@@ -77,7 +82,9 @@ class UikitTemplate
             else
                 $routeParameters[$name] = $parameter;
 
-        $title = [trans('routes.' . request()->route()->getName(), $routeParameters)];
+        $translationKey = static::getTranslationKey();
+
+        $title = [trans($translationKey . request()->route()->getName(), $routeParameters)];
 
         foreach($parameters as $name => $parameter)
             if(! is_string($parameter))
