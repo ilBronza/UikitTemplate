@@ -6,14 +6,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
+    <script src="{{ config('app.url') }}/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
-
-    <link rel="stylesheet" type="text/css" href="/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
-    <link rel="stylesheet" type="text/css" href="/css/own.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ config('app.url') }}/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ config('app.url') }}/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ config('app.url') }}/css/own.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 
     <script type="text/javascript">
 
@@ -25,6 +24,14 @@
     <title>{{ app('uikittemplate')->getPageTitle() }}</title>
 
     @include('formfield::scripts.scripts')
+
+    <script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('recaptcha', {
+          'sitekey' : '6LeIUKooAAAAAEajMZUwoQRf2Q-VSLODcukkQCIm'
+        });
+      };
+    </script>
 
     @include('ukn::scripts')
     <style type="text/css">

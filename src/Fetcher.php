@@ -142,7 +142,7 @@ class Fetcher
 
     public function getUrl()
     {
-        return $this->url;
+        return $this->url . '?ibFetcher=true';
     }
 
     public function getViewComponentName() : string

@@ -60,6 +60,16 @@ jQuery(document).ready(function($)
             return cellData[cellIndex][0];
         }
 
+        if(fetchtarget == 'elementId')
+        {
+            let cell = window.__getCell(target);
+            let cellIndex = $(target).data('cellindex');
+
+            cellData = cell.data();
+
+            return cellData[cellIndex][1];
+        }
+
         alert('non so come prendere il replasincId');
     }
 
