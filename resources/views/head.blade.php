@@ -16,6 +16,7 @@
 
     <script type="text/javascript">
 
+        window.csrfToken = '{{ csrf_token() }}';
         jQuery.ajaxSetup({headers     :{'X-CSRF-Token': '{{ csrf_token() }}'}});
         window.replace_model_id_string = "{{ config("datatables.replace_model_id_string") }}";
 

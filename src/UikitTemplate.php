@@ -36,6 +36,12 @@ class UikitTemplate
         if(request()->ajax())
             return ;
 
+        if(! request()->route())
+            return ;
+
+        if(! $routeName = request()->route()->getName())
+            return ;
+
         $parameters = request()->route()->parameters();
 
         $routeParameters = [];
@@ -46,7 +52,7 @@ class UikitTemplate
             else
                 $routeParameters[$name] = $parameter;
 
-        $key = 'pageClasses.' . request()->route()->getName();
+        $key = 'pageClasses.' . $routeName;
         $translated = trans($key, $routeParameters);
 
         if($key == $translated)
@@ -72,6 +78,9 @@ class UikitTemplate
         if(request()->ajax())
             return ;
 
+        if(! request()->route())
+            return config('app.name');
+
         $parameters = request()->route()->parameters();
 
         $routeParameters = [];
@@ -89,7 +98,8 @@ class UikitTemplate
         foreach($parameters as $name => $parameter)
             if(! is_string($parameter))
                 if($_title = $parameter->getBrowserTitle())
-                    $title[] = $_title;
+                    if(! in_array($_title, $title))
+                        $title[] = $_title;
 
         return implode(" | ", $title);
     }
