@@ -17,9 +17,25 @@ function iFrameUrl(string $url, array $parameters = [])
 	return $url . '&iframed=true';
 }
 
+function mori($variable = null)
+{
+	echo json_encode($variable);
+
+	die();
+}
+
 function morime($variable = null)
 {
 	if(\Auth::id() == 1)
 		mori($variable);
+}
+
+function moriMethods($variable = null)
+{
+	echo json_encode(
+		get_class_methods($variable)
+	);
+
+	die();
 }
 
