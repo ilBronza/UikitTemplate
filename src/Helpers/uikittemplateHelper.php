@@ -17,6 +17,17 @@ function iFrameUrl(string $url, array $parameters = [])
 	return $url . '&iframed=true';
 }
 
+function ff($variable)
+{
+	$methods = get_class_methods($variable);
+	sort($methods);
+
+	return dd([
+		$variable,
+		$methods
+	]);
+}
+
 function mori($variable = null)
 {
 	echo json_encode($variable);
