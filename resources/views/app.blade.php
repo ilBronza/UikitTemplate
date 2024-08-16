@@ -236,10 +236,10 @@ $(window).on('load', function ()
   });
 })
 </script>
-
-@if(empty($iframed)&& Auth::id())
-  {!! app('menu')->render() !!}
-@endif
+  
+    @if((! __ib_IFRAMED__)&& Auth::id())
+        {!! app('menu')->render() !!}
+    @endif
 
 {{-- @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')

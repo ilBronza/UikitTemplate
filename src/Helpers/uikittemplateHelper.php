@@ -28,6 +28,26 @@ function ff($variable)
 	]);
 }
 
+function mm($variable)
+{
+	$methods = get_class_methods($variable);
+
+	if(config('app.debug') == false)
+		return dd($methods);
+
+	return dd([$methods, debug_backtrace()]);
+}
+
+function mmm($variable)
+{
+	$methods = get_class_methods($variable);
+
+	if(config('app.debug') == false)
+		return mori($methods);
+
+	return mori([$methods, debug_backtrace()]);
+}
+
 function mori($variable = null)
 {
 	echo json_encode($variable);
