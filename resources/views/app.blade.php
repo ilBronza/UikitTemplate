@@ -4,85 +4,105 @@
 @include('uikittemplate::head')
 
 <body class="{{ app('uikittemplate')->getBodyClass() }}">
-  @include('uikittemplate::utilities.concurrentUri.headerbar')
+@include('uikittemplate::utilities.concurrentUri.headerbar')
 
-<style type="text/css">
-input[type=datetime-local]::-webkit-calendar-picker-indicator
-{
-  margin-left: 0px;
-  background-color: transparent!important;
-}	
-</style>
+<script>
+    jQuery(document).ready(function ($) {
 
+        $('body').on('click', '*[uk-lightbox] a', function () {
 
-<style type="text/css">
-.ibfetchercontainer
-{
-  position: relative;
-}
+            window.fetcherToRefresh = $(this).parents('.ibfetchercontainer');
+        });
 
-.ibfetcherbuttons .spinner
-{
-  display: none;
-}
-</style>
+        UIkit.util.on(document, 'hide', '.uk-lightbox', function (e) {
+            if (window.fetcherToRefresh)
+                $(window.fetcherToRefresh).find('a.refresh').click();
 
-<script type="text/javascript">
-jQuery(document).ready(function($)
-{
-  console.log('this happens because when select multiple is empty, the system doesn\'t load the select name as null. This means that you can\'t empty a relation if you send nothing');
+        });
 
-  window.convertNullMultipleSelectToNullValue = function (form, target)
-  {
-    $(target).prop('disabled', true);
-    let flatname = $(target).data('flatname');
-
-    $(form).append('<input type="hidden" value="" name="' + flatname + '" />');
-  }
-
-  $('body').on('submit', 'form', function(e)
-  {
-    var form = this;
-
-    $(this).find('select').each(function()
-    {
-      if($(this).prop('multiple'))
-      {
-        if($(this).val().length == 0)
-          window.convertNullMultipleSelectToNullValue(form, this);
-
-        else if($(this).val().length == 1)
-          if(($(this).val()[0] === '')||($(this).val()[0] === null)||(typeof $(this).val()[0] === 'undefined'))
-            window.convertNullMultipleSelectToNullValue(form, this);
-      }
     });
-  });
+</script>
 
-  $('body').on('change', '.charttype', function ()
-  {
-    let chartid = $(this).data('chartid');
-    let chartName = 'myChart' + chartid;
 
-    let chartOptionsName;
 
-    let type = $(this).val();
 
-    if((type == 'pie')||(type == 'doughnut'))
-      chartOptionsName = 'pieChartOptions' + chartid;
-    else
-      chartOptionsName = 'chartOptions' + chartid;
+<style type="text/css">
+    input[type=datetime-local]::-webkit-calendar-picker-indicator
+    {
+        margin-left: 0px;
+        background-color: transparent!important;
+    }
+</style>
 
-    if(window[chartName])
-      window[chartName].destroy();
 
-    var ctx = document.getElementById(chartid).getContext("2d");
+<style type="text/css">
+    .ibfetchercontainer
+    {
+        position: relative;
+    }
 
-    var temp = jQuery.extend(true, {}, window[chartOptionsName]);
-    temp.type = type;
+    .ibfetcherbuttons .spinner
+    {
+        display: none;
+    }
+</style>
 
-    window[chartName] = new Chart(ctx, temp);
-  });
-});
+<script type="text/javascript">
+    jQuery(document).ready(function($)
+    {
+        console.log('this happens because when select multiple is empty, the system doesn\'t load the select name as null. This means that you can\'t empty a relation if you send nothing');
+
+        window.convertNullMultipleSelectToNullValue = function (form, target)
+        {
+            $(target).prop('disabled', true);
+            let flatname = $(target).data('flatname');
+
+            $(form).append('<input type="hidden" value="" name="' + flatname + '" />');
+        }
+
+        $('body').on('submit', 'form', function(e)
+        {
+            var form = this;
+
+            $(this).find('select').each(function()
+            {
+                if($(this).prop('multiple'))
+                {
+                    if($(this).val().length == 0)
+                        window.convertNullMultipleSelectToNullValue(form, this);
+
+                    else if($(this).val().length == 1)
+                        if(($(this).val()[0] === '')||($(this).val()[0] === null)||(typeof $(this).val()[0] === 'undefined'))
+                            window.convertNullMultipleSelectToNullValue(form, this);
+                }
+            });
+        });
+
+        $('body').on('change', '.charttype', function ()
+        {
+            let chartid = $(this).data('chartid');
+            let chartName = 'myChart' + chartid;
+
+            let chartOptionsName;
+
+            let type = $(this).val();
+
+            if((type == 'pie')||(type == 'doughnut'))
+                chartOptionsName = 'pieChartOptions' + chartid;
+            else
+                chartOptionsName = 'chartOptions' + chartid;
+
+            if(window[chartName])
+                window[chartName].destroy();
+
+            var ctx = document.getElementById(chartid).getContext("2d");
+
+            var temp = jQuery.extend(true, {}, window[chartOptionsName]);
+            temp.type = type;
+
+            window[chartName] = new Chart(ctx, temp);
+        });
+    });
 
 </script>
 
@@ -93,153 +113,153 @@ jQuery(document).ready(function($)
 
 <script type="text/javascript">
 
-window.ibFetcherSpin = function(target)
-{
-  var id = $(target).attr('id');
-
-  console.log('spinno');
-  $('fetcherbuttons-' + id).find('.spinner').css('display', 'block');
-  $('fetcherbuttons-' + id).find('a.refresh').css('display', 'none');
-}
-
-window.ibFetcherStopSpinning = function(target)
-{
-  var id = $(target).attr('id');
-
-  console.log('DEspinno');
-  $('fetcherbuttons-' + id).find('.spinner').css('display', 'none');
-  $('fetcherbuttons-' + id).find('a.refresh').css('display', 'inline');
-}
-
-window.ibFetcherCollectData = function(target)
-{
-  var id = $(target).attr('id');
-
-  var fieldContainer = $('.ibfetcherfields.' + id);
-
-  if(! fieldContainer.length)
-    return null;
-
-  var data = {};
-
-  $(fieldContainer).find('input').each(function ()
-  {
-    var name = $(this).attr('name');
-    var value = $(this).val();
-
-    data[name] = value;
-  });
-
-  return data;
-}
-
-window.ibFetcherFetch = function (target, warn = false)
-{
-  window.ibFetcherSpin(target);
-
-  let id = $(target).attr('id');
-  let event = $(target).data('event');
-  let url = $(target).data('url');
-
-  let data = window.ibFetcherCollectData(target);
-
-  $.ajax({
-    url: url,
-    data: data,
-    success: function (response)
+    window.ibFetcherSpin = function(target)
     {
-      if(response == '')
-      {
-        $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'none');
-        $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'none');
-      }
-      else
-      {
-        $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'block');
-        $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'block');
-      }
+        var id = $(target).attr('id');
 
-      $('.fetchercontainer.' + id).html(response);
-
-      $(target).data('loaded', true);
-      window.ibFetcherStopSpinning(target);
-
-      if(warn)
-      {
-        let title = $(target).data('title');
-
-        if(! title)
-          title = 'Elemento';
-
-        window.addSuccessNotification(title + ' caricato con successo');
-      }
-    },
-    error: function(response)
-    {
-      let title = $(target).data('title');
-
-      if(! title)
-        title = 'Elemento';
-
-      window.addDangerNotification('Caricamento di ' + title + ' interrotto');
-      window.ibFetcherStopSpinning(target);      
+        console.log('spinno');
+        $('fetcherbuttons-' + id).find('.spinner').css('display', 'block');
+        $('fetcherbuttons-' + id).find('a.refresh').css('display', 'none');
     }
-  });
-}
 
-window.ibFetcherExpand = function (target, warn = false)
-{
-  let url = new URL($(target).data('url'));
+    window.ibFetcherStopSpinning = function(target)
+    {
+        var id = $(target).attr('id');
 
-  url.searchParams.append('fullpagechart', true);
+        console.log('DEspinno');
+        $('fetcherbuttons-' + id).find('.spinner').css('display', 'none');
+        $('fetcherbuttons-' + id).find('a.refresh').css('display', 'inline');
+    }
 
-  let data = window.ibFetcherCollectData(target);
+    window.ibFetcherCollectData = function(target)
+    {
+        var id = $(target).attr('id');
 
-  for (var key in data)
-    url.searchParams.append(key, data[key]);
+        var fieldContainer = $('.ibfetcherfields.' + id);
 
-  window.open(url);
-}
+        if(! fieldContainer.length)
+            return null;
+
+        var data = {};
+
+        $(fieldContainer).find('input').each(function ()
+        {
+            var name = $(this).attr('name');
+            var value = $(this).val();
+
+            data[name] = value;
+        });
+
+        return data;
+    }
+
+    window.ibFetcherFetch = function (target, warn = false)
+    {
+        window.ibFetcherSpin(target);
+
+        let id = $(target).attr('id');
+        let event = $(target).data('event');
+        let url = $(target).data('url');
+
+        let data = window.ibFetcherCollectData(target);
+
+        $.ajax({
+            url: url,
+            data: data,
+            success: function (response)
+            {
+                if(response == '')
+                {
+                    $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'none');
+                    $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'none');
+                }
+                else
+                {
+                    $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'block');
+                    $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'block');
+                }
+
+                $('.fetchercontainer.' + id).html(response);
+
+                $(target).data('loaded', true);
+                window.ibFetcherStopSpinning(target);
+
+                if(warn)
+                {
+                    let title = $(target).data('title');
+
+                    if(! title)
+                        title = 'Elemento';
+
+                    window.addSuccessNotification(title + ' caricato con successo');
+                }
+            },
+            error: function(response)
+            {
+                let title = $(target).data('title');
+
+                if(! title)
+                    title = 'Elemento';
+
+                window.addDangerNotification('Caricamento di ' + title + ' interrotto');
+                window.ibFetcherStopSpinning(target);
+            }
+        });
+    }
+
+    window.ibFetcherExpand = function (target, warn = false)
+    {
+        let url = new URL($(target).data('url'));
+
+        url.searchParams.append('fullpagechart', true);
+
+        let data = window.ibFetcherCollectData(target);
+
+        for (var key in data)
+            url.searchParams.append(key, data[key]);
+
+        window.open(url);
+    }
 
 
-window.ibInitializeFetcher = function (target)
-{
-  if($(target).data('loaded'))
-    return ;
+    window.ibInitializeFetcher = function (target)
+    {
+        if($(target).data('loaded'))
+            return ;
 
-  window.ibFetcherFetch(target);
-}
+        window.ibFetcherFetch(target);
+    }
 
-$(window).on('load', function ()
-{
-  $('.ibfetcher').each(function()
-  {
-    window.ibInitializeFetcher($(this));
-  });
+    $(window).on('load', function ()
+    {
+        $('.ibfetcher').each(function()
+        {
+            window.ibInitializeFetcher($(this));
+        });
 
-  $('.ibfetcherbuttons .refresh').on('click', function()
-  {
-    var container = $(this).parents('.ibfetcherbuttons');
-    var id = $(container).data('id');
-    let target = $('#' + id);
+        $('.ibfetcherbuttons .refresh').on('click', function()
+        {
+            var container = $(this).parents('.ibfetcherbuttons');
+            var id = $(container).data('id');
+            let target = $('#' + id);
 
-    window.ibFetcherFetch(target, true);
-  });
+            window.ibFetcherFetch(target, true);
+        });
 
-  $('.ibfetcherbuttons .expand').on('click', function()
-  {
-    var container = $(this).parents('.ibfetcherbuttons');
-    var id = $(container).data('id');
-    let target = $('#' + id);
+        $('.ibfetcherbuttons .expand').on('click', function()
+        {
+            var container = $(this).parents('.ibfetcherbuttons');
+            var id = $(container).data('id');
+            let target = $('#' + id);
 
-    window.ibFetcherExpand(target, true);
-  });
-})
+            window.ibFetcherExpand(target, true);
+        });
+    })
 </script>
-  
-    @if((! __ib_IFRAMED__)&& Auth::id())
-        {!! app('menu')->render() !!}
-    @endif
+
+@if((! __ib_IFRAMED__)&& Auth::id())
+    {!! app('menu')->render() !!}
+@endif
 
 {{-- @if(empty($iframed)&& Auth::id())
     @include('navbar.navbar')
@@ -247,22 +267,22 @@ $(window).on('load', function ()
  --}}
 @include('formfield::scripts')
 
-	@includeIf('layouts.projectSpecificHeader')
+@includeIf('layouts.projectSpecificHeader')
 
-    @yield('layout.offcanvas')
+@yield('layout.offcanvas')
 
-    <div class="uk-padding-small">
+<div class="uk-padding-small">
 
-        @yield('content')
+    @yield('content')
 
-    </div>
+</div>
 
-	@include('uikittemplate::utilities.__extraViews', ['position' => 'bottom'])
+@include('uikittemplate::utilities.__extraViews', ['position' => 'bottom'])
 
-	@includeIf('layouts.projectSpecificFooter')
-    @include('uikittemplate::footer')
+@includeIf('layouts.projectSpecificFooter')
+@include('uikittemplate::footer')
 
 
-  @include('uikittemplate::utilities.concurrentUri.scripts')
+@include('uikittemplate::utilities.concurrentUri.scripts')
 </body>
 </html>

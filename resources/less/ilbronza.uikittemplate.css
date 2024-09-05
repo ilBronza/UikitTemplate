@@ -1,0 +1,35 @@
+input:read-only {
+  cursor: not-allowed;
+}
+body .uk-description-list dt {
+  font-weight: bold;
+}
+.ib-horizontal-description-list {
+  width: 100%;
+  float: left;
+  clear: both;
+}
+.ib-horizontal-description-list dd,
+.ib-horizontal-description-list dt {
+  float: left;
+  margin: 0!important;
+}
+.ib-horizontal-description-list dt {
+  clear: left;
+  width: 50%;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ib-horizontal-description-list dt:after {
+  content: ':';
+}
+.ib-horizontal-description-list dd {
+  clear: right;
+}
+.uk-card-body > .uk-switcher > li {
+  padding: 0;
+  border: none;
+}
+/*# sourceMappingURL=ilbronza.uikittemplate.css.map */
