@@ -9,15 +9,46 @@
 <script>
     jQuery(document).ready(function ($) {
 
-        $('body').on('click', '*[uk-lightbox] a', function () {
 
+        window.checkElementsToRefresh = function ()
+        {
+
+            if (window.fetcherToRefresh)
+            {
+                $(window.fetcherToRefresh).find('a.refresh').click();
+                window.fetcherToRefresh = null;
+            }
+
+            if (window.tableToRefresh)
+            {
+                let table = $(window.tableToRefresh).DataTable();
+
+                window.reloadDatatable(table);
+
+                window.tableToRefresh = null;
+            }
+        }
+
+        $('body').on('click', '.clickfetchermodal', function ()
+        {
+            window.tableToRefresh = $(this).parents('.datatable');
             window.fetcherToRefresh = $(this).parents('.ibfetchercontainer');
         });
 
-        UIkit.util.on(document, 'hide', '.uk-lightbox', function (e) {
-            if (window.fetcherToRefresh)
-                $(window.fetcherToRefresh).find('a.refresh').click();
+        $('body').on('click', '*[uk-lightbox] a', function ()
+        {
+            window.tableToRefresh = $(this).parents('.datatable');
+            window.fetcherToRefresh = $(this).parents('.ibfetchercontainer');
+        });
 
+        UIkit.util.on(document, 'hide', '.uk-modal', function (e)
+        {
+            window.checkElementsToRefresh();
+        });
+
+        UIkit.util.on(document, 'hide', '.uk-lightbox', function (e)
+        {
+            window.checkElementsToRefresh();
         });
 
     });
