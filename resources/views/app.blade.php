@@ -148,7 +148,7 @@
     {
         var id = $(target).attr('id');
 
-        console.log('spinno');
+        // console.log('spinno');
         $('fetcherbuttons-' + id).find('.spinner').css('display', 'block');
         $('fetcherbuttons-' + id).find('a.refresh').css('display', 'none');
     }
@@ -157,7 +157,7 @@
     {
         var id = $(target).attr('id');
 
-        console.log('DEspinno');
+        // console.log('DEspinno');
         $('fetcherbuttons-' + id).find('.spinner').css('display', 'none');
         $('fetcherbuttons-' + id).find('a.refresh').css('display', 'inline');
     }

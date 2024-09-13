@@ -132,6 +132,24 @@ jQuery(document).ready(function($)
         });
     });
 
+    $('body').on('click', '.clickfetcherlightbox', function(e)
+    {
+        let fetchUrl = window.getTooltipFetchUrl(this);
+
+        let target = this;
+
+        let panel = UIkit.lightboxPanel({
+            items: [
+                {
+                    source: fetchUrl,
+                    type: 'iframe'
+                }
+            ]
+        });
+
+        panel.show();
+    })
+
     $('body').on('mouseenter', '.hoverfetchermodal', function(e)
     {
         let fetchUrl = window.getTooltipFetchUrl(this);
