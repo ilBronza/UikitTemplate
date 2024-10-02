@@ -132,20 +132,45 @@ jQuery(document).ready(function($)
         });
     });
 
+    $(document).on('beforehide', '.uk-lightbox', function ()
+    {
+        if($(this).data('reloadtableid'))
+        {
+            var table = $('#' + $(this).data('reloadtableid')).DataTable();
+            window.reloadDatatable(table);
+        }
+    });
+
     $('body').on('click', '.clickfetcherlightbox', function(e)
     {
         let fetchUrl = window.getTooltipFetchUrl(this);
-
         let target = this;
-
         let panel = UIkit.lightboxPanel({
             items: [
                 {
                     source: fetchUrl,
                     type: 'iframe'
                 }
-            ]
+            ],
         });
+
+        let reloadTable = false;
+
+        let th = window.__getTH(target);
+        if($(th).data('reloadtable'))
+            reloadTable = true;
+
+        if($(target).data('reloadtable'))
+            reloadTable = true;
+
+        if(reloadTable)
+        {
+            let table = window.__getTable(target);
+
+            let tableId = $(table).attr('id');
+
+            $(panel.$el).data('reloadtableid', tableId);
+        }
 
         panel.show();
     })
