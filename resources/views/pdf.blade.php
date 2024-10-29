@@ -3,10 +3,12 @@
 
 <head>
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
     <title>{{ app('uikittemplate')->getPageTitle() }}</title>
 
-    <link rel="stylesheet" type="text/css" href="{{ public_path('/uikittemplate/uikit/templates/' . config('uikittemplate.pdf.theme') . '.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ public_path('/css/ownpdf.css') }}"/>
+    @include('uikittemplate::css.uikitCss')
+    @include('uikittemplate::css.ownPdfCss')
 
 </head>
 <body class="{{ app('uikittemplate')->getBodyClass() }}">

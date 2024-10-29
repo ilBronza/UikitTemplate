@@ -15,4 +15,8 @@ return [
 	'theme' => env('APP_UIKITTHEME', 'vibe'),
 	'theme' => env('APP_UIKITTHEME', 'max'),
 
+	'pdf' => [
+		'theme' => env('APP_UIKITTHEME', 'yoosomething')
+	]
+
 ];
