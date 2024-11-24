@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 
 class UikitTemplate
 {
+	public array $bodyHtmlClasses = [];
+
     public function getTemplateName()
     {
         return config('uikittemplate.template', 'uikit');
@@ -23,12 +25,23 @@ class UikitTemplate
         return 'uk-padding-small ibcontainer';
     }
 
-    static function getBodyClass()
-    {
-        if(! Auth::id())
-            return "guest " . Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
+	public function addBodyHtmlClass(string $class)
+	{
+		$this->bodyHtmlClasses[] = $class;
+	}
 
-        return "user" . Auth::id() . " " . Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
+	public function getBodyHtmlClasses() : array
+	{
+		return $this->bodyHtmlClasses;
+	}
+
+    public function getBodyClass() : string
+    {
+		$standardClass = ((! Auth::id()) ? 'guest' : 'user') . Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
+
+	    $this->addBodyHtmlClass($standardClass);
+
+		return implode(' ', $this->getBodyHtmlClasses());
     }
 
     static function getPageClass()
