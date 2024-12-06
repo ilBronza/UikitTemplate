@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 
 class UikitTemplate
 {
+	public string $pageTitle;
 	public array $bodyHtmlClasses = [];
 
     public function getTemplateName()
@@ -37,7 +38,7 @@ class UikitTemplate
 
     public function getBodyClass() : string
     {
-		$standardClass = ((! Auth::id()) ? 'guest' : 'user') . Str::slug(static::getPageTitle()) . ' ' . static::getPageClass();
+		$standardClass = ((! Auth::id()) ? 'guest' : 'user') . Str::slug($this->getPageTitle()) . ' ' . static::getPageClass();
 
 	    $this->addBodyHtmlClass($standardClass);
 
@@ -86,10 +87,20 @@ class UikitTemplate
         return request()->route()->action['routeTranslationPrefix'] ?? 'routes.';
     }
 
-    static function getPageTitle()
+	public function setPageTitle(string $title) : self
+	{
+		$this->pageTitle = $title;
+
+		return $this;
+	}
+
+    public function getPageTitle()
     {
         if(request()->ajax())
             return ;
+
+		if(isset($this->pageTitle))
+			return $this->pageTitle;
 
         if(! request()->route())
             return config('app.name');
