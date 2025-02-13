@@ -48,6 +48,11 @@ function mmm($variable)
 	return mori([$methods, debug_backtrace()]);
 }
 
+function gcm($object)
+{
+	return mori(get_class_methods($object));
+}
+
 function mori($variable = null)
 {
 	echo json_encode($variable);

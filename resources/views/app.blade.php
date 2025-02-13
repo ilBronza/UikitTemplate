@@ -7,9 +7,8 @@
 @include('uikittemplate::utilities.concurrentUri.headerbar')
 
 <script>
-    jQuery(document).ready(function ($) {
-
-
+    jQuery(document).ready(function ($)
+	{
         window.checkElementsToRefresh = function ()
         {
 
@@ -50,30 +49,22 @@
         {
             window.checkElementsToRefresh();
         });
-
     });
 </script>
 
-
-
-
 <style type="text/css">
-    input[type=datetime-local]::-webkit-calendar-picker-indicator
-    {
+    input[type=datetime-local]::-webkit-calendar-picker-indicator {
         margin-left: 0px;
         background-color: transparent!important;
     }
 </style>
 
-
 <style type="text/css">
-    .ibfetchercontainer
-    {
+    .ibfetchercontainer {
         position: relative;
     }
 
-    .ibfetcherbuttons .spinner
-    {
+    .ibfetcherbuttons .spinner {
         display: none;
     }
 </style>
@@ -139,9 +130,6 @@
 
 
 
-
-
-
 <script type="text/javascript">
 
     window.ibFetcherSpin = function(target)
@@ -203,8 +191,7 @@
                 {
                     $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'none');
                     $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'none');
-                }
-                else
+                } else
                 {
                     $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'block');
                     $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'block');
@@ -214,6 +201,14 @@
 
                 $(target).data('loaded', true);
                 window.ibFetcherStopSpinning(target);
+
+                $('.select2').select2();
+                $(document).on('select2:open', function (e) {
+                    var selectId = e.target.id;
+                    $(".select2-search__field[aria-controls='select2-" + selectId + "-results']").each(function (key, value) {
+                        value.focus();
+                    });
+                });
 
                 if(warn)
                 {
@@ -292,10 +287,6 @@
     {!! app('menu')->render() !!}
 @endif
 
-{{-- @if(empty($iframed)&& Auth::id())
-    @include('navbar.navbar')
-@endif
- --}}
 @include('formfield::scripts')
 
 @includeIf('layouts.projectSpecificHeader')

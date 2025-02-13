@@ -19,7 +19,7 @@ trait UseTemplateTrait
 
 	public function getTemplateName()
     {
-        return config('app.template', 'uikit');
+        return config('app.template', 'rinominare_template_in_generale');
     }
 
     public function template()

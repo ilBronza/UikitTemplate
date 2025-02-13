@@ -1,6 +1,8 @@
 <div class="ibfetcherbuttons {{ $fetcher->getId() }}" data-id="{{ $fetcher->getId() }}">
 	@foreach($fetcher->getButtons() as $button)
-	{!! $button->render() !!}
+		@if($button->isIframe())
+			{!! $button->renderIFrame() !!}
+		@endif
 	@endforeach
 
 	@if($fetcher->hasRefresh())

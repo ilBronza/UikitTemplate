@@ -12,7 +12,6 @@
         window.replace_model_id_string = "{{ config("datatables.replace_model_id_string") }}";
 
         window.fieldsVisibilityString = "{{ __('datatables::fields.fieldsVisibilityLabel') }}";
-
     </script>
 
     <script src="{{ config('app.url') }}/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
@@ -21,12 +20,14 @@
         jQuery.ajaxSetup({headers     :{'X-CSRF-Token': '{{ csrf_token() }}'}});
     </script>
 
+    <link rel="icon" type="image/x-icon" href="{{ config('uikittemplate.favicon.path', '/favicon.ico') }}">
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link href="/fa/css/all.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="{{ config('app.url') }}/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
     <link rel="stylesheet" type="text/css" href="{{ config('app.url') }}/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
     <link rel="stylesheet" type="text/css" href="{{ config('app.url') }}/css/own.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ config('app.url') }}/css/datatables.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 
     <title>{{ app('uikittemplate')->getPageTitle() }}</title>
 
