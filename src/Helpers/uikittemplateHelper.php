@@ -11,7 +11,7 @@ function iFrameUrl(string $url, array $parameters = [])
 {
 	$parameters['iframed'] = true;
 
-	if(strpos($url, "?") === false)
+	if (strpos($url, "?") === false)
 		return $url . '?iframed=true';
 
 	return $url . '&iframed=true';
@@ -19,7 +19,15 @@ function iFrameUrl(string $url, array $parameters = [])
 
 function ff($variable)
 {
-	$methods = get_class_methods($variable);
+	try
+	{
+		$methods = get_class_methods($variable);
+	}
+	catch(\Throwable $e)
+	{
+		$methods = [];
+	}
+
 	sort($methods);
 
 	return dd([
@@ -32,7 +40,7 @@ function mm($variable)
 {
 	$methods = get_class_methods($variable);
 
-	if(config('app.debug') == false)
+	if (config('app.debug') == false)
 		return dd($methods);
 
 	return dd([$methods, debug_backtrace()]);
@@ -42,7 +50,7 @@ function mmm($variable)
 {
 	$methods = get_class_methods($variable);
 
-	if(config('app.debug') == false)
+	if (config('app.debug') == false)
 		return mori($methods);
 
 	return mori([$methods, debug_backtrace()]);
@@ -62,8 +70,8 @@ function mori($variable = null)
 
 function morime($variable = null)
 {
-	if(\Auth::id() == 1)
-		mori($variable);
+	if (Auth::id() == 1)
+		dd($variable);
 }
 
 function moriMethods($variable = null)

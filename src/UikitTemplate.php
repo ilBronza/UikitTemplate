@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 
 class UikitTemplate
 {
+	public ? string $h1 = null;
 	public string $pageTitle;
 	public array $bodyHtmlClasses = [];
 
@@ -38,7 +39,9 @@ class UikitTemplate
 
     public function getBodyClass() : string
     {
-		$standardClass = ((! Auth::id()) ? 'guest' : 'user') . Str::slug($this->getPageTitle()) . ' ' . static::getPageClass();
+		$userString = (! Auth::id()) ? 'guest' : 'user user' . Auth::id() . ' ' . Auth::user()->getRolesString();
+
+		$standardClass = $userString . ' ' . Str::slug($this->getPageTitle()) . ' ' . static::getPageClass();
 
 	    $this->addBodyHtmlClass($standardClass);
 
@@ -92,6 +95,21 @@ class UikitTemplate
 		$this->pageTitle = $title;
 
 		return $this;
+	}
+
+	public function setH1(string $h1) : self
+	{
+		$this->h1 = $h1;
+
+		return $this;
+	}
+
+	public function getH1()
+	{
+		if($this->h1)
+			return $this->h1;
+
+		return $this->getPageTitle();
 	}
 
     public function getPageTitle()
