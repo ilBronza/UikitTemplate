@@ -1,5 +1,33 @@
 <?php
 
+if (!function_exists('class_uses_recursive')) {
+	function class_uses_recursive($class): array
+	{
+		if (is_object($class)) {
+			$class = get_class($class);
+		}
+
+		$results = [];
+
+		do {
+			$results += trait_uses_recursive($class);
+		} while ($class = get_parent_class($class));
+
+		return array_unique($results);
+	}
+
+	function trait_uses_recursive($trait): array
+	{
+		$traits = class_uses($trait) ?: [];
+
+		foreach ($traits as $t) {
+			$traits += trait_uses_recursive($t);
+		}
+
+		return $traits;
+	}
+}
+
 function iFrameRoute(string $route, array $parameters = [])
 {
 	$parameters['iframed'] = true;

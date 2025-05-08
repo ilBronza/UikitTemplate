@@ -134,7 +134,7 @@ jQuery(document).ready(function($)
 
     $(document).on('beforehide', '.uk-lightbox', function ()
     {
-        if($(this).data('reloadtableid'))
+        if (typeof($(this).data('reloadtableid')) !== 'undefined')
         {
             var table = $('#' + $(this).data('reloadtableid')).DataTable();
             window.reloadDatatable(table);
