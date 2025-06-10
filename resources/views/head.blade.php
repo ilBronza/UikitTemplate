@@ -14,7 +14,10 @@
         window.fieldsVisibilityString = "{{ __('datatables::fields.fieldsVisibilityLabel') }}";
 	</script>
 
-	<script src="{{ config('app.url') }}/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
+{{--	<script src="{{ config('app.url') }}/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>--}}
+
+
+	@vite(['resources/js/app.js', 'resources/css/app.css'])
 
 	<script type="text/javascript">
         jQuery.ajaxSetup({headers: {'X-CSRF-Token': '{{ csrf_token() }}'}});
@@ -24,8 +27,7 @@
 
 	<link href="/fa/css/all.min.css" rel="stylesheet"/>
 
-	<link rel="stylesheet" type="text/css"
-		  href="{{ config('app.url') }}/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
+{{--	<link rel="stylesheet" type="text/css" href="{{ config('app.url') }}/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>--}}
 	<link rel="stylesheet" type="text/css"
 		  href="{{ config('app.url') }}/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 	<link rel="stylesheet" type="text/css"
