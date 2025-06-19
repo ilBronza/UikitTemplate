@@ -7,6 +7,8 @@ use IlBronza\Menu\Navbar;
 use IlBronza\UikitTemplate\Fetcher;
 use Illuminate\Support\ServiceProvider;
 
+use function base_path;
+
 class UikitTemplateServiceProvider extends ServiceProvider
 {
     /**
@@ -91,7 +93,8 @@ class UikitTemplateServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../public' => public_path('uikittemplate/'),
             __DIR__.'/../resources/js' => base_path('resources/js'),
-            __DIR__.'/../resources/less' => base_path('resources/less'),
+	        __DIR__.'/../resources/css' => base_path('resources/css'),
+	        __DIR__.'/../resources/less' => base_path('resources/less'),
             __DIR__.'/../resources/sass' => base_path('resources/sass')
         ], 'uikittemplate.assets');
 
