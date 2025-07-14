@@ -128,7 +128,11 @@ jQuery(document).ready(function($)
             return response.text();
         }).then(function (html)
         {
-            UIkit.modal.dialog(html);
+            let modal = UIkit.modal.dialog(html);//.show();
+
+            let th = window.__getTH(target);
+
+            $(modal.$el).addClass(th.attr('class'));
         });
     });
 
