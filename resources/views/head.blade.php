@@ -31,7 +31,7 @@
 	<link rel="stylesheet" type="text/css"
 		  href="{{ config('app.url') }}/css/own.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 	<link rel="stylesheet" type="text/css"
-		  href="{{ config('app.url') }}/css/datatables.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
+		  href="{{ config('app.url') }}/css/datatable.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 
 	<title>{{ strip_tags(app('uikittemplate')->getPageTitle()) }}</title>
 
@@ -53,11 +53,11 @@
             max-width: 100% !important;
         }
 
-        table.dataTable tbody a {
-            display: inline-block;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+        /*table.dataTable tbody a {*/
+        /*    display: inline-block;*/
+        /*    text-overflow: ellipsis;*/
+        /*    white-space: nowrap;*/
+        /*}*/
 
         table.dataTable tbody a:not(.uk-icon) {
             overflow: hidden;

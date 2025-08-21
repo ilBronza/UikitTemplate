@@ -306,5 +306,14 @@
 
 
 @include('uikittemplate::utilities.concurrentUri.scripts')
+
+@if((\Auth::id() == 1)&&($action = app('request')->route()->getAction()))
+
+    <pre>
+        Controller: {{ $action['controller'] }}
+    </pre>
+    
+@endif
+
 </body>
 </html>

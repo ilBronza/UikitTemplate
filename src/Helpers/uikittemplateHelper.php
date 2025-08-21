@@ -1,26 +1,33 @@
 <?php
 
-if (!function_exists('class_uses_recursive')) {
-	function class_uses_recursive($class): array
+use Symfony\Component\VarDumper\Caster\ScalarStub;
+use Symfony\Component\VarDumper\VarDumper;
+
+if (! function_exists('class_uses_recursive'))
+{
+	function class_uses_recursive($class) : array
 	{
-		if (is_object($class)) {
+		if (is_object($class))
+		{
 			$class = get_class($class);
 		}
 
 		$results = [];
 
-		do {
+		do
+		{
 			$results += trait_uses_recursive($class);
 		} while ($class = get_parent_class($class));
 
 		return array_unique($results);
 	}
 
-	function trait_uses_recursive($trait): array
+	function trait_uses_recursive($trait) : array
 	{
-		$traits = class_uses($trait) ?: [];
+		$traits = class_uses($trait) ? : [];
 
-		foreach ($traits as $t) {
+		foreach ($traits as $t)
+		{
 			$traits += trait_uses_recursive($t);
 		}
 
@@ -45,23 +52,33 @@ function iFrameUrl(string $url, array $parameters = [])
 	return $url . '&iframed=true';
 }
 
-function ff($variable)
+function ff(mixed ...$vars) : never
 {
-	try
+	if (! in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) && ! headers_sent())
 	{
-		$methods = get_class_methods($variable);
-	}
-	catch(\Throwable $e)
-	{
-		$methods = [];
+		header('HTTP/1.1 500 Internal Server Error');
 	}
 
-	sort($methods);
+	if (! $vars)
+	{
+		VarDumper::dump(new ScalarStub('🐛'));
 
-	return dd([
-		$variable,
-		$methods
-	]);
+		exit(1);
+	}
+
+	if (array_key_exists(0, $vars) && 1 === count($vars))
+	{
+		VarDumper::dump(get_class_methods($vars[0]));
+	}
+	else
+	{
+		foreach ($vars as $k => $v)
+		{
+			VarDumper::dump($v, is_int($k) ? 1 + $k : $k);
+		}
+	}
+
+	exit(1);
 }
 
 function mm($variable)
