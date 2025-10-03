@@ -73,6 +73,13 @@ jQuery(document).ready(function($)
         alert('non so come prendere il replasincId');
     }
 
+    window.addIframedToUrl = function(url)
+    {
+        if(url.indexOf('?') !== -1)
+            return url + '&iframed=1';
+
+        return url + '?iframed=1';
+    }
 
     window.getTooltipFetchUrl = function(target)
     {
@@ -123,6 +130,7 @@ jQuery(document).ready(function($)
     {
         var fetchUrl = window.getTooltipFetchUrl(this);
         var target = this;
+
         fetch(fetchUrl).then(function (response)
         {
             return response.text();
@@ -145,9 +153,12 @@ jQuery(document).ready(function($)
         }
     });
 
-    $('body').on('click', '.clickfetcherlightbox', function(e)
+    $('body').on('click', '.clickfetcherlightbox, .clickfetcheriframe', function(e)
     {
-        let fetchUrl = window.getTooltipFetchUrl(this);
+        let fetchUrl = window.addIframedToUrl(
+            window.getTooltipFetchUrl(this)
+        );
+
         let target = this;
         let panel = UIkit.lightboxPanel({
             items: [

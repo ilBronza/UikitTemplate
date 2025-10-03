@@ -22,16 +22,12 @@
 
 	<link rel="icon" type="image/x-icon" href="{{ config('uikittemplate.favicon.path', '/favicon.ico') }}">
 
-	<link href="/fa/css/all.min.css" rel="stylesheet"/>
-
 	<link rel="stylesheet" type="text/css"
 		  href="{{ config('app.url') }}/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 	<link rel="stylesheet" type="text/css"
 		  href="{{ config('app.url') }}/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 	<link rel="stylesheet" type="text/css"
 		  href="{{ config('app.url') }}/css/own.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
-	<link rel="stylesheet" type="text/css"
-		  href="{{ config('app.url') }}/css/datatable.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 
 	<title>{{ strip_tags(app('uikittemplate')->getPageTitle()) }}</title>
 
@@ -52,12 +48,6 @@
         .uk-tooltip {
             max-width: 100% !important;
         }
-
-        /*table.dataTable tbody a {*/
-        /*    display: inline-block;*/
-        /*    text-overflow: ellipsis;*/
-        /*    white-space: nowrap;*/
-        /*}*/
 
         table.dataTable tbody a:not(.uk-icon) {
             overflow: hidden;
