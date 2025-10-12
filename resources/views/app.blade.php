@@ -310,7 +310,7 @@
 @if((\Auth::id() == 1)&&($action = app('request')->route()->getAction()))
 
     <pre>
-        Controller: {{ $action['controller'] }}
+        Controller: {{ ($action['controller'] ?? 'nessun controller') }}
     </pre>
     
 @endif
