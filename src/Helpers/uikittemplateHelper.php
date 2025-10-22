@@ -116,7 +116,15 @@ function mori($variable = null)
 function morime($variable = null)
 {
 	if (Auth::id() == 1)
+	{
+		// $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 0);
+
+		// dd($backtrace);
+
+		// throw new \Exception(json_decode($variable));
+
 		dd($variable);
+	}
 }
 
 function moriMethods($variable = null)
