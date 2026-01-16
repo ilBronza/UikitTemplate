@@ -73,12 +73,12 @@ jQuery(document).ready(function($)
         alert('non so come prendere il replasincId');
     }
 
-    window.addIframedToUrl = function(url)
+    window.addIframedToUrl = function(url, callertablename = '', rowId = '')
     {
         if(url.indexOf('?') !== -1)
-            return url + '&iframed=1';
+            return url + '&iframed=1&callertablename=' + callertablename + '&callerrowid=' + rowId;
 
-        return url + '?iframed=1';
+        return url + '?iframed=1&callertablename=' + callertablename + '&callerrowid=' + rowId;
     }
 
     window.getTooltipFetchUrl = function(target)
@@ -155,8 +155,13 @@ jQuery(document).ready(function($)
 
     $('body').on('click', '.clickfetcherlightbox, .clickfetcheriframe', function(e)
     {
+        let callertablename = ($(this).closest('table').length > 0) ?  $(this).closest('table').attr('id') : '';
+        let rowId = ($(this).closest('tr').length > 0) ?  $(this).closest('tr').attr('id') : '';
+
         let fetchUrl = window.addIframedToUrl(
-            window.getTooltipFetchUrl(this)
+            window.getTooltipFetchUrl(this),
+            callertablename,
+            rowId
         );
 
         let target = this;
