@@ -311,8 +311,14 @@
 
     <pre>
         Controller: {{ ($action['controller'] ?? 'nessun controller') }}
-    </pre>
     
+        @if(isset($fieldsetParametersFile))
+
+        FieldsetsParametersFile: {{ $fieldsetParametersFile }}
+        
+        @endif
+
+    </pre>
 @endif
 
 </body>
