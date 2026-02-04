@@ -12,9 +12,21 @@ class UikitTemplate
 	public string $pageTitle;
 	public array $bodyHtmlClasses = [];
 
+    public array $fieldsGroupsNames = [];
+
     public function getTemplateName()
     {
         return config('uikittemplate.template', 'uikit');
+    }
+
+    public function addFieldsGroupsNames(string $name)
+    {
+        $this->fieldsGroupsNames[] = $name;
+    }
+
+    public function getFieldsGroupsNames() : array
+    {
+        return $this->fieldsGroupsNames;
     }
 
 	public function getNavbars()

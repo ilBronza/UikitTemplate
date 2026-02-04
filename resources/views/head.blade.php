@@ -11,6 +11,10 @@
         window.csrfToken = '{{ csrf_token() }}';
         window.replace_model_id_string = "{{ config("datatables.replace_model_id_string") }}";
 
+        @if($googleMapsApiKey = config('services.google.maps_key'))
+		window.googleMapsApiKey = "{{ $googleMapsApiKey }}";
+        @endif
+
         window.fieldsVisibilityString = "{{ __('datatables::fields.fieldsVisibilityLabel') }}";
 	</script>
 
@@ -20,7 +24,7 @@
         jQuery.ajaxSetup({headers: {'X-CSRF-Token': '{{ csrf_token() }}'}});
 	</script>
 
-	<link rel="icon" type="image/x-icon" href="{{ config('uikittemplate.favicon.path', '/favicon.ico') }}">
+	<link rel="icon" type="image/x-icon" href="{{ config('uikittemplate.favicon.path', '/favicon.png') }}">
 
 	<link rel="stylesheet" type="text/css"
 		  href="{{ config('app.url') }}/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>

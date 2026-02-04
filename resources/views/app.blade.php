@@ -130,159 +130,6 @@
 
 
 
-<script type="text/javascript">
-
-    window.ibFetcherSpin = function(target)
-    {
-        var id = $(target).attr('id');
-
-        // console.log('spinno');
-        $('fetcherbuttons-' + id).find('.spinner').css('display', 'block');
-        $('fetcherbuttons-' + id).find('a.refresh').css('display', 'none');
-    }
-
-    window.ibFetcherStopSpinning = function(target)
-    {
-        var id = $(target).attr('id');
-
-        // console.log('DEspinno');
-        $('fetcherbuttons-' + id).find('.spinner').css('display', 'none');
-        $('fetcherbuttons-' + id).find('a.refresh').css('display', 'inline');
-    }
-
-    window.ibFetcherCollectData = function(target)
-    {
-        var id = $(target).attr('id');
-
-        var fieldContainer = $('.ibfetcherfields.' + id);
-
-        if(! fieldContainer.length)
-            return null;
-
-        var data = {};
-
-        $(fieldContainer).find('input').each(function ()
-        {
-            var name = $(this).attr('name');
-            var value = $(this).val();
-
-            data[name] = value;
-        });
-
-        return data;
-    }
-
-    window.ibFetcherFetch = function (target, warn = false)
-    {
-        window.ibFetcherSpin(target);
-
-        let id = $(target).attr('id');
-        let event = $(target).data('event');
-        let url = $(target).data('url');
-
-        let data = window.ibFetcherCollectData(target);
-
-        $.ajax({
-            url: url,
-            data: data,
-            success: function (response)
-            {
-                if(response == '')
-                {
-                    $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'none');
-                    $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'none');
-                } else
-                {
-                    $(target).parents('.ibfetchercontainer').find('.ibfetcher').css('display', 'block');
-                    $(target).parents('.ibfetchercontainer').find('.uk-card-body').css('display', 'block');
-                }
-
-                $('.fetchercontainer.' + id).html(response);
-
-                $(target).data('loaded', true);
-                window.ibFetcherStopSpinning(target);
-
-                $('.select2').select2();
-                $(document).on('select2:open', function (e) {
-                    var selectId = e.target.id;
-                    $(".select2-search__field[aria-controls='select2-" + selectId + "-results']").each(function (key, value) {
-                        value.focus();
-                    });
-                });
-
-                if(warn)
-                {
-                    let title = $(target).data('title');
-
-                    if(! title)
-                        title = 'Elemento';
-
-                    window.addSuccessNotification(title + ' caricato con successo');
-                }
-            },
-            error: function(response)
-            {
-                let title = $(target).data('title');
-
-                if(! title)
-                    title = 'Elemento';
-
-                window.addDangerNotification('Caricamento di ' + title + ' interrotto');
-                window.ibFetcherStopSpinning(target);
-            }
-        });
-    }
-
-    window.ibFetcherExpand = function (target, warn = false)
-    {
-        let url = new URL($(target).data('url'));
-
-        url.searchParams.append('fullpagechart', true);
-
-        let data = window.ibFetcherCollectData(target);
-
-        for (var key in data)
-            url.searchParams.append(key, data[key]);
-
-        window.open(url);
-    }
-
-
-    window.ibInitializeFetcher = function (target)
-    {
-        if($(target).data('loaded'))
-            return ;
-
-        window.ibFetcherFetch(target);
-    }
-
-    $(window).on('load', function ()
-    {
-        $('.ibfetcher').each(function()
-        {
-            window.ibInitializeFetcher($(this));
-        });
-
-        $('.ibfetcherbuttons .refresh').on('click', function()
-        {
-            var container = $(this).parents('.ibfetcherbuttons');
-            var id = $(container).data('id');
-            let target = $('#' + id);
-
-            window.ibFetcherFetch(target, true);
-        });
-
-        $('.ibfetcherbuttons .expand').on('click', function()
-        {
-            var container = $(this).parents('.ibfetcherbuttons');
-            var id = $(container).data('id');
-            let target = $('#' + id);
-
-            window.ibFetcherExpand(target, true);
-        });
-    })
-</script>
-
 @if((! __ib_IFRAMED__)&& Auth::id())
     {!! app('menu')->render() !!}
 @endif
@@ -310,13 +157,24 @@
 @if((\Auth::id() == 1)&&($action = app('request')->route()->getAction()))
 
     <pre>
-        Controller: {{ ($action['controller'] ?? 'nessun controller') }}
+Controller: 
+
+{{ ($action['controller'] ?? 'nessun controller') }}
     
         @if(isset($fieldsetParametersFile))
 
-        FieldsetsParametersFile: {{ $fieldsetParametersFile }}
+FieldsetsParametersFile: 
+
+{{ $fieldsetParametersFile }}
         
         @endif
+
+        @foreach(app('uikittemplate')->getFieldsGroupsNames() as $fieldsGroupsName)
+
+FieldsGroupsName: 
+
+{{ $fieldsGroupsName }}
+        @endforeach
 
     </pre>
 @endif
