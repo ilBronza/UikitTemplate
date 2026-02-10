@@ -61,11 +61,6 @@
             float: left;
         }
 
-        input[type="date"]::-webkit-datetime-edit-month-field,
-        input[type="date"]::-webkit-datetime-edit-day-field,
-        input[type="date"]::-webkit-datetime-edit-year-field {
-            color: #ddd;
-        }
 	</style>
 
 	@includeIf('layouts._projectScripts')

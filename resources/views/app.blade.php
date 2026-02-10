@@ -129,8 +129,7 @@
 </script>
 
 
-
-@if((! __ib_IFRAMED__)&& Auth::id())
+@if(! ($ib_IFRAMED ?? false) && Auth::check())
     {!! app('menu')->render() !!}
 @endif
 
