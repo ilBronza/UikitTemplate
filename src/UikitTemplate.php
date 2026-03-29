@@ -194,4 +194,19 @@ class UikitTemplate
     {
         return 'uk-width-1-1';
     }
+
+    public function getLogo() : array
+    {
+        return config('menu.logo');
+    }
+
+    public function getLogoUrl() : string
+    {
+        return $this->getLogo()['path'];
+    }
+
+    public function getAppName() : string
+    {
+        return config('app.name');
+    }
 }

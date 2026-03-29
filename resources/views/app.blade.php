@@ -131,11 +131,11 @@
 
 @if(! ($ib_IFRAMED ?? false) && Auth::check())
     {!! app('menu')->render() !!}
+    @includeIf('layouts.projectSpecificHeader')
 @endif
 
 @include('formfield::scripts')
 
-@includeIf('layouts.projectSpecificHeader')
 
 @yield('layout.offcanvas')
 
