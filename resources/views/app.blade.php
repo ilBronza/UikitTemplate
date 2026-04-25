@@ -156,21 +156,28 @@
 @if((\Auth::id() == 1)&&($action = app('request')->route()->getAction()))
 
     <pre>
-Controller: 
+<strong class="uk-h2">Controller:</strong>
 
 {{ ($action['controller'] ?? 'nessun controller') }}
     
         @if(isset($fieldsetParametersFile))
 
-FieldsetsParametersFile: 
+<strong class="uk-h2">FieldsetsParametersFile:</strong>
 
 {{ $fieldsetParametersFile }}
         
         @endif
 
-        @foreach(app('uikittemplate')->getFieldsGroupsNames() as $fieldsGroupsName)
+<strong class="uk-h2">RelationsManagerNames:</strong>
 
-FieldsGroupsName: 
+        @foreach(app('uikittemplate')->getRelationsManagerNames() as $name)
+
+{{ $name }}
+        @endforeach
+
+<strong class="uk-h2">FieldsGroupsName:</strong>
+
+        @foreach(app('uikittemplate')->getFieldsGroupsNames() as $fieldsGroupsName)
 
 {{ $fieldsGroupsName }}
         @endforeach

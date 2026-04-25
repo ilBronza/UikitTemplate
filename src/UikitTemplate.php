@@ -13,6 +13,7 @@ class UikitTemplate
 	public array $bodyHtmlClasses = [];
 
     public array $fieldsGroupsNames = [];
+    public array $relationsManagerNames = [];
 
     public function getTemplateName()
     {
@@ -22,6 +23,16 @@ class UikitTemplate
     public function addFieldsGroupsNames(string $name)
     {
         $this->fieldsGroupsNames[] = $name;
+    }
+
+    public function addRelationsManagerNames(string $name)
+    {
+        $this->relationsManagerNames[] = $name;
+    }
+
+    public function getRelationsManagerNames() : array
+    {
+        return $this->relationsManagerNames;
     }
 
     public function getFieldsGroupsNames() : array
