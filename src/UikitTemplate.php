@@ -13,6 +13,7 @@ class UikitTemplate
 	public array $bodyHtmlClasses = [];
 
     public array $fieldsGroupsNames = [];
+    public array $customGetters = [];
     public array $relationsManagerNames = [];
 
     public function getTemplateName()
@@ -25,6 +26,11 @@ class UikitTemplate
         $this->fieldsGroupsNames[] = $name;
     }
 
+    public function addCustomGetter(string $name)
+    {
+        $this->customGetters[] = $name;
+    }
+
     public function addRelationsManagerNames(string $name)
     {
         $this->relationsManagerNames[] = $name;
@@ -33,6 +39,11 @@ class UikitTemplate
     public function getRelationsManagerNames() : array
     {
         return $this->relationsManagerNames;
+    }
+
+    public function getCustomGetters() : array
+    {
+        return $this->customGetters;
     }
 
     public function getFieldsGroupsNames() : array
@@ -162,9 +173,10 @@ class UikitTemplate
 
         foreach($parameters as $name => $parameter)
             if(! is_string($parameter))
-                if($_title = $parameter->getBrowserTitle())
-                    if(! in_array($_title, $title))
-                        $title[] = $_title;
+                if(is_object($parameter))
+                    if($_title = $parameter->getBrowserTitle())
+                        if(! in_array($_title, $title))
+                            $title[] = $_title;
 
         return implode(" | ", $title);
     }

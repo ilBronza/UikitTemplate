@@ -141,6 +141,10 @@
 
 <div class="uk-padding-small">
 
+    @if(env('CLIENT_TEST_ENV'))
+        @include('crud::utilities._clientTestEnvironment')
+    @endif
+
     @yield('content')
 
 </div>
@@ -152,6 +156,8 @@
 
 
 @include('uikittemplate::utilities.concurrentUri.scripts')
+
+@includeWhen(auth()->check() && view()->exists('accountmanager::heartbeat'), 'accountmanager::heartbeat')
 
 @if((\Auth::id() == 1)&&($action = app('request')->route()->getAction()))
 
@@ -180,6 +186,12 @@
         @foreach(app('uikittemplate')->getFieldsGroupsNames() as $fieldsGroupsName)
 
 {{ $fieldsGroupsName }}
+        @endforeach
+
+<strong class="uk-h2">Custom Getters:</strong>
+
+        @foreach(app('uikittemplate')->getCustomGetters() as $customGetter)
+{{ $customGetter }}
         @endforeach
 
     </pre>
