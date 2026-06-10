@@ -123,7 +123,7 @@ function morime($variable = null)
 
 		// throw new \Exception(json_decode($variable));
 
-		dd($variable);
+		throw new \Exception($variable);
 	}
 }
 
