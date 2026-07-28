@@ -153,6 +153,9 @@
 
 @includeIf('layouts.projectSpecificFooter')
 @include('uikittemplate::footer')
+@if(config('uikittemplate.show_broadcast_updates', true))
+    @include('uikittemplate::components._footerEventLog')
+@endif
 
 
 @include('uikittemplate::utilities.concurrentUri.scripts')

@@ -53,6 +53,51 @@ npm run development
 
 ## Usage
 
+### Footer event log
+
+Every page extending `uikittemplate::app` includes a small, non-persistent event console in the bottom-right corner. It is independent from the existing UIkit notifications (`addSuccessNotification`, `addDangerNotification`, and so on), which continue to work unchanged.
+
+Set `APP_UIKIT_SHOW_BROADCAST_UPDATES=false` to hide the console and prevent its browser hooks and listeners from being registered. The setting defaults to `true`.
+
+Send a short, safe-to-display event through the global API:
+
+```js
+window.footerEventLog.push({
+    message: 'Order 42 updated',
+    level: 'success', // info | success | warning | error
+    source: 'CRUD',   // optional
+    data: {}          // optional; never displayed or retained by the console
+});
+```
+
+Or emit the equivalent browser event, useful for decoupled integrations:
+
+```js
+window.dispatchEvent(new CustomEvent('uikittemplate:footer-log', {
+    detail: {
+        message: 'Data table reloaded',
+        level: 'success',
+        source: 'Datatables'
+    }
+}));
+```
+
+Each entry has a timestamp, level, message and optional source. The short live list disappears after 5.5 seconds by default; the current page's in-memory history can be shown with `footerEventLog.expand()`. No event is persisted across page loads. `footerEventLog.clearVisible()` and `footerEventLog.collapse()` are also available when needed.
+
+Set options before the footer component is rendered (for example in a script included by the page `<head>`):
+
+```js
+window.footerEventLogOptions = {
+    timeout: 7000,
+    maxVisible: 3,
+    maxHistory: 30
+};
+```
+
+The component uses no application-specific dependency. Its styles are scoped under `#uikittemplate-footer-event-log` and expose CSS custom properties such as `--uikittemplate-footer-log-background`, `--uikittemplate-footer-log-right` and `--uikittemplate-footer-log-bottom`, so host applications can reposition or restyle it without replacing the component. Messages and sources are inserted exclusively with `textContent`; never send secrets in `message`, `source`, or `data`.
+
+For compatibility with the optional Datatables CRUD-broadcast integration, the component also defines `window.addFooterLog(message, context)` only when the host application has not already defined it. The adapter forwards the message, `context.level`, and `context.source` to `footerEventLog.push()`; the rest of `context` is treated as non-rendered data.
+
 ## Change log
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.

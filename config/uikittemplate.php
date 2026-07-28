@@ -7,6 +7,10 @@ return [
 
 	'logo' => env('APP_LOGO'),
 
+	// Controls the footer event log used by CRUD broadcast updates.
+	// When disabled, the component and its browser listeners are not rendered.
+	'show_broadcast_updates' => env('APP_UIKIT_SHOW_BROADCAST_UPDATES', true),
+
 //	'theme' => env('APP_UIKITTHEME', 'yoosomething'),
 //  'theme' => env('APP_UIKITTHEME', 'flow'),
 //	'theme' => env('APP_UIKITTHEME', 'designescapes'),
