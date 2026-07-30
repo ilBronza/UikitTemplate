@@ -20,6 +20,12 @@
 
 	<script src="{{ config('app.url') }}/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
 
+	@if(config('crud.broadcast.enabled'))
+		<script type="text/javascript">
+            window.Echo = window.createReverbEcho();
+		</script>
+	@endif
+
 	<script type="text/javascript">
         jQuery.ajaxSetup({headers: {'X-CSRF-Token': '{{ csrf_token() }}'}});
 	</script>
