@@ -18,12 +18,64 @@
         window.fieldsVisibilityString = "{{ __('datatables::fields.fieldsVisibilityLabel') }}";
 	</script>
 
+	@if(config('crud.broadcast.enabled'))
+		@php
+			$reverbConfig = [
+				'key' => config('broadcasting.connections.reverb.key'),
+				'host' => config('broadcasting.connections.reverb.options.host'),
+				'port' => config('broadcasting.connections.reverb.options.port'),
+				'scheme' => config('broadcasting.connections.reverb.options.scheme'),
+			];
+		@endphp
+		<script type="text/javascript">
+			window.reverbConfig = {{ Illuminate\Support\Js::from($reverbConfig) }};
+		</script>
+	@endif
+
 	<script src="{{ config('app.url') }}/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
 
 	@if(config('crud.broadcast.enabled'))
 		<script type="text/javascript">
             window.Echo = window.createReverbEcho();
 		</script>
+
+		@if(auth()->check())
+			<script type="text/javascript">
+			(() => {
+				let horizonAlertShown = false;
+
+				const checkBroadcastHealth = async () => {
+					try {
+						const response = await fetch('{{ route('uikittemplate.broadcast-health') }}', {
+							headers: {'Accept': 'application/json'},
+							credentials: 'same-origin',
+						});
+
+						if (! response.ok) {
+							return;
+						}
+
+						const {status} = await response.json();
+
+						if (status === 'running') {
+							horizonAlertShown = false;
+							return;
+						}
+
+						if (! horizonAlertShown) {
+							horizonAlertShown = true;
+							alert('Horizon non è attivo: gli aggiornamenti in tempo reale potrebbero non arrivare.');
+						}
+					} catch (error) {
+						console.warn('Impossibile verificare lo stato di Horizon.', error);
+					}
+				};
+
+				checkBroadcastHealth();
+				window.setInterval(checkBroadcastHealth, 60_000);
+			})();
+		</script>
+		@endif
 	@endif
 
 	<script type="text/javascript">
