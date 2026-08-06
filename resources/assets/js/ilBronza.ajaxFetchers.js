@@ -141,6 +141,14 @@ jQuery(document).ready(function($)
             let th = window.__getTH(target);
 
             $(modal.$el).addClass(th.attr('class'));
+
+            if($(target).data('refreshrowonclose'))
+                $(modal.$el).on('hidden', function()
+                {
+                    window.__refreshRow({
+                        target: target
+                    });
+                });
         });
     });
 
