@@ -34,7 +34,9 @@
             window.fetcherToRefresh = $(this).parents('.ibfetchercontainer');
         });
 
-        $('body').on('click', '*[uk-lightbox] a', function ()
+        // Only iframe lightboxes (edit/forms). Plain image lightboxes must not
+        // mark the parent datatable for reload on close.
+        $('body').on('click', '*[uk-lightbox] a[data-type="iframe"]', function ()
         {
             window.tableToRefresh = $(this).parents('.datatable');
             window.fetcherToRefresh = $(this).parents('.ibfetchercontainer');

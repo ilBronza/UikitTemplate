@@ -1,6 +1,8 @@
 jQuery(document).ready(function ($) {
 
-    $('body').on('click', '*[uk-lightbox] a', function () {
+    // Only iframe lightboxes (edit/forms). Plain image lightboxes must not
+    // mark the parent fetcher for reload on close.
+    $('body').on('click', '*[uk-lightbox] a[data-type="iframe"]', function () {
 
         window.fetcherToRefresh = $(this).parents('.ibfetchercontainer');
     });
