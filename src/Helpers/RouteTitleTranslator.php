@@ -19,10 +19,21 @@ class RouteTitleTranslator
 			throw new RuntimeException('Cannot resolve route title translation prefix without a route.');
 
 		if ($prefix = ($route->action['routeTranslationPrefix'] ?? null))
+		{
+			if (is_array($prefix))
+				$prefix = end($prefix);
+
+			if (! is_string($prefix) || $prefix === '')
+				throw new RuntimeException('routeTranslationPrefix must resolve to a non-empty string on route [' . ($route->getName() ?? 'unnamed') . '].');
+
 			return $prefix;
+		}
 
 		if ($package = ($route->action['ibPackage'] ?? null))
 		{
+			if (is_array($package))
+				$package = end($package);
+
 			if (! is_string($package) || ! method_exists($package, 'getRouteTranslationPrefix'))
 				throw new RuntimeException('Route ibPackage must be a package class with getRouteTranslationPrefix().');
 
