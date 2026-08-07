@@ -3,6 +3,7 @@
 namespace IlBronza\UikitTemplate;
 
 use Auth;
+use IlBronza\UikitTemplate\Helpers\RouteTitleTranslator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -121,7 +122,7 @@ class UikitTemplate
 
     static function getTranslationKey() : string
     {
-        return request()->route()->action['routeTranslationPrefix'] ?? 'routes.';
+        return RouteTitleTranslator::getTranslationPrefix();
     }
 
 	public function setPageTitle(string $title) : self
@@ -157,7 +158,12 @@ class UikitTemplate
         if(! request()->route())
             return config('app.name');
 
-        $parameters = request()->route()->parameters();
+		$route = request()->route();
+
+		if(! $routeName = $route->getName())
+			return config('app.name');
+
+        $parameters = $route->parameters();
 
         $routeParameters = [];
 
@@ -167,9 +173,7 @@ class UikitTemplate
             else
                 $routeParameters[$name] = $parameter;
 
-        $translationKey = static::getTranslationKey();
-
-        $title = [trans($translationKey . request()->route()->getName(), $routeParameters)];
+        $title = [RouteTitleTranslator::resolve($routeName, $routeParameters, $route)];
 
         foreach($parameters as $name => $parameter)
             if(! is_string($parameter))
