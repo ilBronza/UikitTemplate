@@ -64,7 +64,7 @@
 
 						if (! horizonAlertShown) {
 							horizonAlertShown = true;
-							alert('Horizon non è attivo: gli aggiornamenti in tempo reale potrebbero non arrivare.');
+							window.addDangerNotification('Horizon non è attivo: gli aggiornamenti in tempo reale potrebbero non arrivare.');
 						}
 					} catch (error) {
 						console.warn('Impossibile verificare lo stato di Horizon.', error);
