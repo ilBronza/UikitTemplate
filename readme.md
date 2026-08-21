@@ -53,6 +53,43 @@ npm run development
 
 ## Usage
 
+### Elementi collassabili
+
+`CollapsibleElementTrait` fornisce stato, identificatore HTML e selettori per rendere collassabile qualsiasi oggetto. Il trait non impone la struttura HTML dell'elemento che lo usa.
+
+```php
+use IlBronza\UikitTemplate\Traits\CollapsibleElementTrait;
+
+class Panel
+{
+    use CollapsibleElementTrait;
+}
+
+$panel->setCollapsible()
+    ->setCollapsedInitially();
+```
+
+Il pulsante UIkit standard è un componente Blade anonimo:
+
+```blade
+<x-uikittemplate::collapse-toggle
+    :element="$panel"
+    label="Dettagli"
+    aria-label="Apri o chiudi i dettagli"
+/>
+
+<div
+    id="{{ $panel->getCollapseTargetId() }}"
+    class="{{ $panel->getCollapseTargetHtmlClassesString() }}"
+>
+    ...
+</div>
+```
+
+Gli attributi Blade aggiuntivi vengono applicati al pulsante. Sono inoltre disponibili le prop `expanded-icon` e `collapsed-icon`. Per usare un id deterministico chiamare `setCollapseTargetId()`; sono accettati id HTML composti da lettere, numeri, `_` e `-`, con una lettera iniziale.
+
+Il componente mantiene automaticamente lo stato aperto/chiuso nella `sessionStorage` del browser usando `getCollapseStateKey()`. Gli oggetti che usano il trait possono impostare manualmente una chiave con `setCollapseStateKey()`; in assenza di override il trait usa il suo id di target.
+
 ### Footer event log
 
 Every page extending `uikittemplate::app` includes a small, non-persistent event console in the bottom-right corner. It is independent from the existing UIkit notifications (`addSuccessNotification`, `addDangerNotification`, and so on), which continue to work unchanged.
