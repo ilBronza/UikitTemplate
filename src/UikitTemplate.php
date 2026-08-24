@@ -76,12 +76,23 @@ class UikitTemplate
     {
 		$userString = (! Auth::id()) ? 'guest' : 'user user' . Auth::id() . ' ' . Auth::user()->getRolesString();
 
-		$standardClass = $userString . ' ' . Str::slug($this->getPageTitle()) . ' ' . static::getPageClass();
+		$standardClass = $userString . ' ' . Str::slug($this->getPageTitle()) . ' ' . static::getPageClass() . ' ' . static::getRouteNameClass();
 
 	    $this->addBodyHtmlClass($standardClass);
 
 		return implode(' ', $this->getBodyHtmlClasses());
     }
+
+	static function getRouteNameClass() : ? string
+	{
+		if(! $route = request()->route())
+			return null;
+
+		if(! $routeName = $route->getName())
+			return null;
+
+		return Str::slug(str_replace('.', '-', $routeName));
+	}
 
     static function getPageClass()
     {
