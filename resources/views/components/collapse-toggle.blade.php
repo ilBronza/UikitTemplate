@@ -26,12 +26,12 @@
 
 		<span
 			data-collapse-expanded-icon
-			class="{{ $element->getCollapseToggleStateClass() }} @if($element->isCollapsedInitially()) uk-hidden @endif"
+			class="{{ $element->getCollapseToggleStateClass() }} @if($element->isCollapsedInitially()) uk-hidden @endif uk-icon-button"
 			uk-icon="{{ $expandedIcon }}"
 		></span>
 		<span
 			data-collapse-collapsed-icon
-			class="{{ $element->getCollapseToggleStateClass() }} @unless($element->isCollapsedInitially()) uk-hidden @endunless"
+			class="{{ $element->getCollapseToggleStateClass() }} @unless($element->isCollapsedInitially()) uk-hidden @endunless uk-icon-button"
 			uk-icon="{{ $collapsedIcon }}"
 		></span>
 	</button>
