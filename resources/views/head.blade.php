@@ -32,6 +32,10 @@
 		</script>
 	@endif
 
+	<script type="text/javascript">
+		window.uikittemplateShowBroadcastUpdates = @json((bool) config('uikittemplate.show_broadcast_updates', true));
+	</script>
+
 	<script src="{{ config('app.url') }}/js/app.js?v={{ config('uikittemplate.version', "1.0.0") }}"></script>
 
 	@if(config('crud.broadcast.enabled'))
