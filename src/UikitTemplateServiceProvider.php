@@ -18,7 +18,7 @@ class UikitTemplateServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ilbronza');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'uikittemplate');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'uikittemplate');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/uikittemplate.php');

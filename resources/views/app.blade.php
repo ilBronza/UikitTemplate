@@ -4,6 +4,12 @@
 @include('uikittemplate::head')
 
 <body class="{{ app('uikittemplate')->getBodyClass() }}">
+
+@if(env('APP_ENV') === 'staging')
+    @include('uikittemplate::utilities._clientTestEnvironment')
+@endif
+
+
 @include('uikittemplate::utilities.concurrentUri.headerbar')
 
 <script>
@@ -200,10 +206,6 @@
 @yield('layout.offcanvas')
 
 <div class="uk-padding-small">
-
-    @if(env('CLIENT_TEST_ENV'))
-        @include('crud::utilities._clientTestEnvironment')
-    @endif
 
     @yield('content')
 
