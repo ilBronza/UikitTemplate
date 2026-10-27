@@ -111,7 +111,9 @@ class UikitTemplate
 
         foreach($parameters as $name => $parameter)
             if ($parameter instanceof Model)
-                $routeParameters[$name] = $parameter->getName();
+                $routeParameters[$name] = method_exists($parameter, 'getName')
+                    ? $parameter->getName()
+                    : ($parameter->getAttribute('name') ?? $parameter->getRouteKey());
             else
                 $routeParameters[$name] = $parameter;
 
@@ -124,7 +126,7 @@ class UikitTemplate
         $title = [$translated];
 
         foreach($parameters as $name => $parameter)
-            if(! is_string($parameter))
+            if(is_object($parameter) && method_exists($parameter, 'getBrowserTitle'))
                 if($_title = $parameter->getBrowserTitle())
                     $title[] = $_title;
 
@@ -180,18 +182,19 @@ class UikitTemplate
 
         foreach($parameters as $name => $parameter)
             if ($parameter instanceof Model)
-                $routeParameters[$name] = $parameter->getName();
+                $routeParameters[$name] = method_exists($parameter, 'getName')
+                    ? $parameter->getName()
+                    : ($parameter->getAttribute('name') ?? $parameter->getRouteKey());
             else
                 $routeParameters[$name] = $parameter;
 
         $title = [RouteTitleTranslator::resolve($routeName, $routeParameters, $route)];
 
         foreach($parameters as $name => $parameter)
-            if(! is_string($parameter))
-                if(is_object($parameter))
-                    if($_title = $parameter->getBrowserTitle())
-                        if(! in_array($_title, $title))
-                            $title[] = $_title;
+            if(is_object($parameter) && method_exists($parameter, 'getBrowserTitle'))
+                if($_title = $parameter->getBrowserTitle())
+                    if(! in_array($_title, $title))
+                        $title[] = $_title;
 
         return implode(" | ", $title);
     }
