@@ -53,6 +53,40 @@ npm run development
 
 ## Usage
 
+### Lingue disponibili
+
+`uikittemplate.availableLanguages` elenca i codici delle lingue disponibili.
+Con `FrontendServiceProvider` registrato, il menu frontend mostra il selettore
+quando il contesto fornisce gli URL della pagina in almeno due lingue disponibili.
+La scelta viene conservata in sessione e il browser raggiunge l'URL localizzato
+fornito dal modello o dall'oggetto della pagina.
+
+In `config/uikittemplate.php`:
+
+```php
+'availableLanguages' => ['it', 'en'],
+```
+
+I codici devono corrispondere alle cartelle dei file di traduzione (`it`, `en`,
+oppure, per esempio, `en_GB`). Ogni progetto può sostituire l'array, includendo
+la propria lingua predefinita. L'ordine dell'array è quello del selettore.
+
+La lingua predefinita e quella di ripiego rimangono nelle impostazioni native
+Laravel `app.locale` e `app.fallback_locale`, normalmente collegate alle variabili
+`APP_LOCALE` e `APP_FALLBACK_LOCALE`: non vengono duplicate nel package.
+L'elenco è un'impostazione del package, non una convenzione nativa di Laravel.
+I provider del menu usano `addTranslated()` o `translate()` per le etichette
+traducibili; `add()` continua ad accettare testi letterali. Gli URL delle voci
+sono già localizzati dai rispettivi modelli/oggetti, usando `$menu->locale()`.
+Il menu non aggiunge prefissi e non modifica il locale globale della richiesta.
+Vedi [menu e cambio lingua frontend](docs/frontend.md#lingua-del-menu) per
+integrazione, override dell'header e dettagli della sessione.
+
+Il file è già pubblicabile con `php artisan vendor:publish --tag=uikittemplate.config`.
+Se l'applicazione ha già un proprio `config/uikittemplate.php`, aggiungere
+`availableLanguages` per personalizzare l'elenco.
+Dopo le modifiche rigenerare l'eventuale cache della configurazione.
+
 ### Manutenzione con accesso amministratori
 
 In `config/uikittemplate.php` impostare `'onlyAdmin' => true`, oppure aggiungere

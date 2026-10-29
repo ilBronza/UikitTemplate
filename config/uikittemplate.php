@@ -7,6 +7,10 @@ return [
 
 	'logo' => env('APP_LOGO'),
 
+	// Locale codes available for selection; must match the translation directories.
+	// Default and fallback languages use Laravel's app.locale and app.fallback_locale.
+	'availableLanguages' => ['it', 'en'],
+
 	// Restrict web requests to administrators and superadmins during maintenance.
 	'onlyAdmin' => env('APP_UIKIT_ONLY_ADMIN', false),
 

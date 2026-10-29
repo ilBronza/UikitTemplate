@@ -10,5 +10,7 @@ final class FrontendContext
         public readonly array $meta = [],
         public readonly array $links = [],
         public readonly mixed $page = null,
+        // Public URLs already localized by the page/model, keyed by locale.
+        public readonly array $languageUrls = [],
     ) {}
 }
