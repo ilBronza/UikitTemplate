@@ -53,6 +53,34 @@ npm run development
 
 ## Usage
 
+### Manutenzione con accesso amministratori
+
+In `config/uikittemplate.php` impostare `'onlyAdmin' => true`, oppure aggiungere
+`APP_UIKIT_ONLY_ADMIN=true` al `.env` quando la configurazione usa il valore del package.
+Il valore predefinito è `false`. Dopo una modifica rigenerare l'eventuale cache
+della configurazione dell'applicazione.
+
+Il provider registra automaticamente il middleware `OnlyAdmin` nel gruppo `web`.
+Durante la manutenzione solo gli utenti con ruolo `administrator` o `superadmin`
+possono proseguire. Ospiti e altri utenti ricevono direttamente la view
+`uikittemplate::maintenance` con stato HTTP **503**, `Retry-After: 60` e cache
+disabilitata. Il controllo avviene dopo l'apertura della sessione e prima di
+`auth`, del binding dei modelli e dei controller, anche per le richieste di scrittura.
+Le richieste che accettano JSON ricevono un messaggio JSON con lo stesso stato.
+Le route fuori dal gruppo `web` non sono interessate.
+
+`onlyAdminExcept` contiene i percorsi o nomi di route di login, logout,
+autenticazione a due fattori, LDAP e GitHub che devono restare raggiungibili
+per consentire l'accesso agli amministratori. Per URL di autenticazione
+personalizzati aggiungere i relativi percorsi, inclusi POST e callback.
+Le eccezioni accettano `*`: mantenere l'elenco limitato alle route necessarie.
+
+La pagina è autonoma, senza menu o asset del gestionale. Per personalizzarla
+creare `resources/views/vendor/uikittemplate/maintenance.blade.php`
+nell'applicazione.
+Mostra il logo configurato in `uikittemplate.logo` (`APP_LOGO`), con fallback
+su `menu.logo.path` e `mail.logo.path`. Se il logo non è configurato, viene omesso.
+
 ### Catalogo dei widget
 
 Il [catalogo illustrato YOOtheme](docs/yootheme-catalogo/README.md) raccoglie esempi, varianti strutturali e riferimenti ai temi per progettare gli helper del package. Include un [PDF consultabile offline](output/pdf/catalogo-widget-yootheme.pdf) e un [confronto fra i caroselli di Design Escapes e Vision](docs/yootheme-catalogo/confronto-caroselli.md).

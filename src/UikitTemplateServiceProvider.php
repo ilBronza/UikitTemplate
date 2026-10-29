@@ -5,7 +5,11 @@ namespace IlBronza\UikitTemplate;
 use IlBronza\Menu\Menu;
 use IlBronza\Menu\Navbar;
 use IlBronza\UikitTemplate\Fetcher;
+use IlBronza\UikitTemplate\Http\Middleware\OnlyAdmin;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 use function base_path;
 
@@ -22,6 +26,28 @@ class UikitTemplateServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'uikittemplate');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/uikittemplate.php');
+
+        $this->callAfterResolving(Kernel::class, function () {
+            $router = $this->app['router'];
+            $router->pushMiddlewareToGroup('web', OnlyAdmin::class);
+
+            // Configure the router directly: older kernels have no priority setters.
+            $priority = $router->middlewarePriority;
+
+            if (in_array(OnlyAdmin::class, $priority, true)) {
+                return;
+            }
+
+            // Resolve the session before this check, but stop before auth and bindings.
+            $position = array_search(ShareErrorsFromSession::class, $priority, true);
+
+            if ($position === false) {
+                $position = array_search(StartSession::class, $priority, true);
+            }
+
+            array_splice($priority, $position === false ? 0 : $position + 1, 0, [OnlyAdmin::class]);
+            $router->middlewarePriority = $priority;
+        });
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {

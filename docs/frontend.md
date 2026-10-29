@@ -55,6 +55,8 @@ URL pubblici dai CRUD e non usare canonical come destinazione implicita.
 Trasportare la lingua del contenuto nei link di modifica e pubblici, senza usare
 un ultimo URL o una modalità in sessione. Le anteprime delle bozze richiedono route
 e policy dedicate, URL separati e meta robots noindex. Una firma non sostituisce
-l'autorizzazione. Il package non registra route pubbliche né modifica middleware.
+l'autorizzazione. Il provider frontend non registra route pubbliche né modifica middleware.
+Il provider principale applica invece la modalità di manutenzione `onlyAdmin`
+alle route del gruppo `web`, incluse quelle pubbliche (vedi il README).
 Per condividere login usare sessione web e guard compatibili, cookie con path e
 dominio appropriati; deployment distinti richiedono verifica di storage e chiavi.
