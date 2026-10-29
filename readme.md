@@ -53,6 +53,10 @@ npm run development
 
 ## Usage
 
+### Catalogo dei widget
+
+Il [catalogo illustrato YOOtheme](docs/yootheme-catalogo/README.md) raccoglie esempi, varianti strutturali e riferimenti ai temi per progettare gli helper del package. Include un [PDF consultabile offline](output/pdf/catalogo-widget-yootheme.pdf) e un [confronto fra i caroselli di Design Escapes e Vision](docs/yootheme-catalogo/confronto-caroselli.md).
+
 ### Elementi collassabili
 
 `CollapsibleElementTrait` fornisce stato, identificatore HTML e selettori per rendere collassabile qualsiasi oggetto. Il trait non impone la struttura HTML dell'elemento che lo usa.

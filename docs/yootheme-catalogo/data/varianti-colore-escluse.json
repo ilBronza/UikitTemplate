@@ -1,0 +1,497 @@
+[
+  {
+    "key": "elements-button-style-primary",
+    "group": "elements",
+    "family": "button",
+    "name": "style primary",
+    "section": "Style",
+    "anchor": "button-style-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button#button-style-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "elements-button-style-secondary",
+    "group": "elements",
+    "family": "button",
+    "name": "style secondary",
+    "section": "Style",
+    "anchor": "button-style-secondary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button#button-style-secondary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "elements-button-style-danger",
+    "group": "elements",
+    "family": "button",
+    "name": "style danger",
+    "section": "Style",
+    "anchor": "button-style-danger",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button#button-style-danger",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "elements-button-style-link-muted",
+    "group": "elements",
+    "family": "button",
+    "name": "style link muted",
+    "section": "Style",
+    "anchor": "button-style-link-muted",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button#button-style-link-muted",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "elements-button-full-width-primary",
+    "group": "elements",
+    "family": "button",
+    "name": "full width primary",
+    "section": "Full Width Button",
+    "anchor": "button-full-width-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button#button-full-width-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button",
+    "options": {},
+    "classes": [
+      "uk-width-1-1",
+      "uk-width-large"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "elements-button-full-width-secondary",
+    "group": "elements",
+    "family": "button",
+    "name": "full width secondary",
+    "section": "Full Width Button",
+    "anchor": "button-full-width-secondary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button#button-full-width-secondary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button",
+    "options": {},
+    "classes": [
+      "uk-width-1-1",
+      "uk-width-large"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "elements-button-full-width-danger",
+    "group": "elements",
+    "family": "button",
+    "name": "full width danger",
+    "section": "Full Width Button",
+    "anchor": "button-full-width-danger",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button#button-full-width-danger",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/button",
+    "options": {},
+    "classes": [
+      "uk-width-1-1",
+      "uk-width-large"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "elements-map-style-inverse",
+    "group": "elements",
+    "family": "map",
+    "name": "style inverse",
+    "section": "Size and Style",
+    "anchor": "map-style-inverse",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/map#map-style-inverse",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/map",
+    "options": {},
+    "classes": [
+      "uk-position-relative",
+      "uk-position-z-index"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "elements-map-style-grey",
+    "group": "elements",
+    "family": "map",
+    "name": "style grey",
+    "section": "Size and Style",
+    "anchor": "map-style-grey",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/map#map-style-grey",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/map",
+    "options": {},
+    "classes": [
+      "uk-position-relative",
+      "uk-position-z-index"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "elements-popover-style-primary",
+    "group": "elements",
+    "family": "popover",
+    "name": "style primary",
+    "section": "Style",
+    "anchor": "popover-style-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/popover#popover-style-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/popover",
+    "options": {},
+    "classes": [
+      "uk-card",
+      "uk-card-body",
+      "uk-card-media-top",
+      "uk-card-primary",
+      "uk-card-title",
+      "uk-position-absolute"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "elements-popover-style-secondary",
+    "group": "elements",
+    "family": "popover",
+    "name": "style secondary",
+    "section": "Style",
+    "anchor": "popover-style-secondary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/popover#popover-style-secondary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/popover",
+    "options": {},
+    "classes": [
+      "uk-card",
+      "uk-card-body",
+      "uk-card-media-top",
+      "uk-card-secondary",
+      "uk-card-title",
+      "uk-position-absolute"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "elements-slideshow-overlay-tile-secondary-bottom-right",
+    "group": "elements",
+    "family": "slideshow",
+    "name": "overlay tile secondary bottom right",
+    "section": "Overlay",
+    "anchor": "slideshow-overlay-tile-secondary-bottom-right",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/slideshow#slideshow-overlay-tile-secondary-bottom-right",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/multiple-items-elements/slideshow",
+    "options": {
+      "uk-slideshow": "minHeight: 600; animation: fade;"
+    },
+    "classes": [
+      "uk-overlay",
+      "uk-position-center-left-out",
+      "uk-position-center-right-out",
+      "uk-position-cover",
+      "uk-position-medium",
+      "uk-position-relative",
+      "uk-transition-fade",
+      "uk-width-xlarge"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "basic-alert-inline-title-primary",
+    "group": "basic",
+    "family": "alert",
+    "name": "inline title primary",
+    "section": "Alert",
+    "anchor": "alert-inline-title-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert#alert-inline-title-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-alert-style-primary",
+    "group": "basic",
+    "family": "alert",
+    "name": "style primary",
+    "section": "Style",
+    "anchor": "alert-style-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert#alert-style-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-alert-style-success",
+    "group": "basic",
+    "family": "alert",
+    "name": "style success",
+    "section": "Style",
+    "anchor": "alert-style-success",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert#alert-style-success",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-alert-style-warning",
+    "group": "basic",
+    "family": "alert",
+    "name": "style warning",
+    "section": "Style",
+    "anchor": "alert-style-warning",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert#alert-style-warning",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-alert-style-danger",
+    "group": "basic",
+    "family": "alert",
+    "name": "style danger",
+    "section": "Style",
+    "anchor": "alert-style-danger",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert#alert-style-danger",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/alert",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-countdown-large-primary",
+    "group": "basic",
+    "family": "countdown",
+    "name": "large primary",
+    "section": "Style",
+    "anchor": "countdown-large-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/countdown#countdown-large-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/countdown",
+    "options": {
+      "uk-grid": null
+    },
+    "classes": [
+      "uk-child-width-auto",
+      "uk-grid-column-medium",
+      "uk-grid-row-small"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "basic-icon-color-primary",
+    "group": "basic",
+    "family": "icon",
+    "name": "color primary",
+    "section": "Color",
+    "anchor": "icon-color-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/icon#icon-color-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/icon",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-icon-color-muted",
+    "group": "basic",
+    "family": "icon",
+    "name": "color muted",
+    "section": "Color",
+    "anchor": "icon-color-muted",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/icon#icon-color-muted",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/icon",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-image-box-decoration-primary",
+    "group": "basic",
+    "family": "image",
+    "name": "box decoration primary",
+    "section": "Box Decoration",
+    "anchor": "image-box-decoration-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/image#image-box-decoration-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/image",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-image-box-decoration-secondary",
+    "group": "basic",
+    "family": "image",
+    "name": "box decoration secondary",
+    "section": "Box Decoration",
+    "anchor": "image-box-decoration-secondary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/image#image-box-decoration-secondary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/image",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  },
+  {
+    "key": "basic-overlay-overlay-primary-cover-hover",
+    "group": "basic",
+    "family": "overlay",
+    "name": "overlay primary cover hover",
+    "section": "Style",
+    "anchor": "overlay-overlay-primary-cover-hover",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/overlay#overlay-overlay-primary-cover-hover",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/overlay",
+    "options": {},
+    "classes": [
+      "uk-overlay",
+      "uk-overlay-primary",
+      "uk-position-center",
+      "uk-position-cover",
+      "uk-transition-opaque",
+      "uk-transition-scale-up",
+      "uk-transition-toggle"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "basic-overlay-tile-secondary-cover-hover",
+    "group": "basic",
+    "family": "overlay",
+    "name": "tile secondary cover hover",
+    "section": "Style",
+    "anchor": "overlay-tile-secondary-cover-hover",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/overlay#overlay-tile-secondary-cover-hover",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/overlay",
+    "options": {},
+    "classes": [
+      "uk-overlay",
+      "uk-position-center",
+      "uk-position-cover",
+      "uk-position-medium",
+      "uk-transition-opaque",
+      "uk-transition-scale-up",
+      "uk-transition-toggle"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "basic-overlay-text-dark-left-center",
+    "group": "basic",
+    "family": "overlay",
+    "name": "text dark left center",
+    "section": "Text Color",
+    "anchor": "overlay-text-dark-left-center",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/overlay#overlay-text-dark-left-center",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/overlay",
+    "options": {},
+    "classes": [
+      "uk-position-center-left",
+      "uk-transition-opaque",
+      "uk-width-large"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "basic-overlay-text-light-left-center",
+    "group": "basic",
+    "family": "overlay",
+    "name": "text light left center",
+    "section": "Text Color",
+    "anchor": "overlay-text-light-left-center",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/overlay#overlay-text-light-left-center",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/overlay",
+    "options": {},
+    "classes": [
+      "uk-position-center-left",
+      "uk-transition-opaque",
+      "uk-width-large"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "basic-panel-style-card-primary",
+    "group": "basic",
+    "family": "panel",
+    "name": "style card primary",
+    "section": "Style",
+    "anchor": "panel-style-card-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/panel#panel-style-card-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/panel",
+    "options": {},
+    "classes": [
+      "uk-card",
+      "uk-card-body",
+      "uk-card-primary",
+      "uk-card-title",
+      "uk-width-large"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "basic-panel-style-card-secondary",
+    "group": "basic",
+    "family": "panel",
+    "name": "style card secondary",
+    "section": "Style",
+    "anchor": "panel-style-card-secondary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/panel#panel-style-card-secondary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/panel",
+    "options": {},
+    "classes": [
+      "uk-card",
+      "uk-card-body",
+      "uk-card-secondary",
+      "uk-card-title",
+      "uk-width-large"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "system-module-style-card-primary",
+    "group": "system",
+    "family": "module",
+    "name": "style card primary",
+    "section": "Panel Style",
+    "anchor": "module-style-card-primary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/system-elements/module#module-style-card-primary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/system-elements/module",
+    "options": {},
+    "classes": [
+      "uk-card",
+      "uk-card-body",
+      "uk-card-primary",
+      "uk-card-title"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "system-module-style-card-secondary",
+    "group": "system",
+    "family": "module",
+    "name": "style card secondary",
+    "section": "Panel Style",
+    "anchor": "module-style-card-secondary",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/system-elements/module#module-style-card-secondary",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/system-elements/module",
+    "options": {},
+    "classes": [
+      "uk-card",
+      "uk-card-body",
+      "uk-card-secondary",
+      "uk-card-title"
+    ],
+    "screenshot": null
+  },
+  {
+    "key": "basic-headline-color-background",
+    "group": "basic",
+    "family": "headline",
+    "name": "color background",
+    "section": "Color Background",
+    "anchor": "headline-color-background",
+    "url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/headline#headline-color-background",
+    "page_url": "https://demo.yootheme.com/joomla/elements/uikit/basic-elements/headline",
+    "options": {},
+    "classes": [],
+    "screenshot": null
+  }
+]
