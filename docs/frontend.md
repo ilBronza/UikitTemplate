@@ -146,6 +146,10 @@ esplicitamente per mostrare il selettore.
 
 Il contesto separa la lingua del contenuto dalla locale dell'interfaccia gestionale.
 `meta` accetta description, robots, canonical, og:* e twitter:*.
+Se `page` espone `getMetaTags()`, i metadati vengono letti automaticamente nella
+lingua del contesto; `meta` e gli override del controller hanno precedenza.
+Il titolo SEO del modello sostituisce il titolo generico del documento, senza
+modificare la lingua del traduttore applicativo.
 `links` accetta array ['url' => ..., 'label' => ...] per i collegamenti tra aree.
 Il controller deve produrli con un resolver applicativo esplicito e policy:
 URL pubblico solo per contenuti pubblicati, modifica solo con autorizzazione,
@@ -162,3 +166,10 @@ Il provider principale applica invece la modalità di manutenzione `onlyAdmin`
 alle route del gruppo `web`, incluse quelle pubbliche (vedi il README).
 Per condividere login usare sessione web e guard compatibili, cookie con path e
 dominio appropriati; deployment distinti richiedono verifica di storage e chiavi.
+
+## Metadati del head
+
+I due layout condividono il rendering dei metadati, con override dai controller
+e fallback automatici per canonical e alternate di lingua. Vedi
+[la guida ai metadati](head-metadata.md). Il fallback degli alternate riguarda
+soltanto il head: il selettore di lingua continua a usare `languageUrls` espliciti.

@@ -239,3 +239,10 @@ license. Please see the [license file](license.md) for more information.
 [link-styleci]: https://styleci.io/repos/12345678
 [link-author]: https://github.com/ilbronza
 [link-contributors]: ../../contributors
+
+## Metadati del documento
+
+Favicon, touch icon, theme color, canonical e alternate di lingua sono
+configurabili e sovrascrivibili dai controller. Canonical e alternate hanno
+fallback automatici; Open Graph e JSON-LD si impostano dagli helper. Vedi
+[la guida ai metadati](docs/head-metadata.md).
