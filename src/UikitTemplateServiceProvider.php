@@ -6,6 +6,7 @@ use IlBronza\Menu\Menu;
 use IlBronza\Menu\Navbar;
 use IlBronza\UikitTemplate\Fetcher;
 use IlBronza\UikitTemplate\Http\Middleware\OnlyAdmin;
+use IlBronza\UikitTemplate\Providers\HeadMetadataServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\ServiceProvider;
@@ -62,6 +63,8 @@ class UikitTemplateServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(HeadMetadataServiceProvider::class);
+
         require_once __DIR__ . '/Helpers/uikittemplateHelper.php';
 
         $this->mergeConfigFrom(__DIR__.'/../config/uikittemplate.php', 'uikittemplate');

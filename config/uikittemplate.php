@@ -11,6 +11,18 @@ return [
 	// Default and fallback languages use Laravel's app.locale and app.fallback_locale.
 	'availableLanguages' => ['it', 'en'],
 
+	'head' => [
+		// Null preserves the legacy favicon.path setting, falling back to /favicon.png.
+		// Icons accept a path string or ['path' => ..., 'type' => ..., 'sizes' => ...].
+		'favicon' => null,
+		'touchIcon' => null,
+		'themeColor' => null,
+		// Null uses the current absolute URL without query parameters.
+		'canonical' => null,
+		// Null prefixes the canonical path with each available language; [] disables links.
+		'hrefLinks' => null,
+	],
+
 	// Restrict web requests to administrators and superadmins during maintenance.
 	'onlyAdmin' => env('APP_UIKIT_ONLY_ADMIN', false),
 

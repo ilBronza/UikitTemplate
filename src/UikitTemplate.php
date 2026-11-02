@@ -4,6 +4,7 @@ namespace IlBronza\UikitTemplate;
 
 use Auth;
 use IlBronza\UikitTemplate\Helpers\RouteTitleTranslator;
+use IlBronza\UikitTemplate\Helpers\HeadMetadata;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -16,6 +17,11 @@ class UikitTemplate
     public array $fieldsGroupsNames = [];
     public array $customGetters = [];
     public array $relationsManagerNames = [];
+
+    public function head(): HeadMetadata
+    {
+        return app(HeadMetadata::class);
+    }
 
     public function getTemplateName()
     {

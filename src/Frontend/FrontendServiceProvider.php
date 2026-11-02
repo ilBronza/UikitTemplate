@@ -4,12 +4,15 @@ namespace IlBronza\UikitTemplate\Frontend;
 
 use Illuminate\Support\ServiceProvider;
 use IlBronza\Menu\Frontend\FrontendMenu;
+use IlBronza\UikitTemplate\Providers\HeadMetadataServiceProvider;
 
 /** Register explicitly in applications which use the public frontend. */
 class FrontendServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        $this->app->register(HeadMetadataServiceProvider::class);
+
         $this->mergeConfigFrom(__DIR__.'/../../config/uikittemplate.php', 'uikittemplate');
 
         $this->app->scoped(FrontendMenu::class, function ($app) {

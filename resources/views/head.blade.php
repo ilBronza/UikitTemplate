@@ -86,7 +86,7 @@
         jQuery.ajaxSetup({headers: {'X-CSRF-Token': '{{ csrf_token() }}'}});
 	</script>
 
-	<link rel="icon" type="image/x-icon" href="{{ config('uikittemplate.favicon.path', '/favicon.png') }}">
+	@include('uikittemplate-head::metadata', ['headTitle' => strip_tags(app('uikittemplate')->getPageTitle())])
 
 	<link rel="stylesheet" type="text/css"
 		  href="{{ config('app.url') }}/css/app.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
@@ -94,8 +94,6 @@
 		  href="{{ config('app.url') }}/uikittemplate/uikit/templates/{{ config('uikittemplate.theme') }}.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
 	<link rel="stylesheet" type="text/css"
 		  href="{{ config('app.url') }}/css/own.css?v={{ config('uikittemplate.version', "1.0.0") }}"/>
-
-	<title>{{ strip_tags(app('uikittemplate')->getPageTitle()) }}</title>
 
 	@include('formfield::scripts.scripts')
 
