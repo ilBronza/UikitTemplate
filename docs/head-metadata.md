@@ -2,7 +2,10 @@
 
 I layout gestionale e frontend usano lo stesso partial
 `uikittemplate-head::metadata` per favicon, touch icon, theme color, canonical,
-alternate di lingua, Open Graph e JSON-LD.
+alternate di lingua, Open Graph e JSON-LD. Gli override Blade di
+`uikit::frontend.layout` / `uikit::frontend.head` devono continuare a includere
+quel partial: è l'unico punto che importa automaticamente `getMetaTags()` da
+`FrontendContext::page`.
 
 ## Configurazione
 

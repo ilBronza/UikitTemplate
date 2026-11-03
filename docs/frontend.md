@@ -173,3 +173,9 @@ I due layout condividono il rendering dei metadati, con override dai controller
 e fallback automatici per canonical e alternate di lingua. Vedi
 [la guida ai metadati](head-metadata.md). Il fallback degli alternate riguarda
 soltanto il head: il selettore di lingua continua a usare `languageUrls` espliciti.
+
+Se si pubblica un override di `uikit::frontend.layout` o `uikit::frontend.head`,
+includere comunque `@include('uikittemplate-head::metadata', ['headTitle' => $frontendContext->title])`
+dentro `<head>`. Senza quel partial, `FrontendContext::page` con `getMetaTags()`
+non alimenta titolo, description, canonical, Open Graph né Twitter card: restano
+solo i valori copiati a mano da `$frontendContext->title` / `meta`.
