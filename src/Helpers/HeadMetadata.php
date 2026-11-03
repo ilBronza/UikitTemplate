@@ -158,12 +158,45 @@ final class HeadMetadata
     public function getHrefLinks(): array
     {
         $links = $this->resolvedHrefLinks();
+        $xDefaultRemoved = false;
 
         foreach ($this->hrefLinkOverrides as $locale => $url) {
             if ($url === null) {
+                $xDefaultRemoved = $xDefaultRemoved || $locale === 'x-default';
                 unset($links[$locale]);
             } else {
                 $links[$locale] = url($url);
+            }
+        }
+
+        return $this->withXDefaultHrefLink($links, $xDefaultRemoved);
+    }
+
+    /** Adds hreflang="x-default" for the site default language when alternates exist. */
+    private function withXDefaultHrefLink(array $links, bool $removed = false): array
+    {
+        if ($removed || $links === [] || array_key_exists('x-default', $links)) {
+            return $links;
+        }
+
+        $defaultLocale = str_replace('_', '-', (string) (
+            config('uikittemplate.head.xDefaultLocale')
+            ?? config('app.base_locale')
+            ?? config('app.locale')
+        ));
+
+        if (isset($links[$defaultLocale])) {
+            $links['x-default'] = $links[$defaultLocale];
+
+            return $links;
+        }
+
+        foreach ($this->languages() as $language) {
+            $locale = str_replace('_', '-', $language);
+            if (isset($links[$locale])) {
+                $links['x-default'] = $links[$locale];
+
+                return $links;
             }
         }
 

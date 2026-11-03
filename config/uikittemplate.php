@@ -21,6 +21,8 @@ return [
 		'canonical' => null,
 		// Null prefixes the canonical path with each available language; [] disables links.
 		'hrefLinks' => null,
+		// Locale used for automatic hreflang="x-default"; null falls back to app.base_locale then app.locale.
+		'xDefaultLocale' => null,
 	],
 
 	// Restrict web requests to administrators and superadmins during maintenance.

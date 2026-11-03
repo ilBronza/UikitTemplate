@@ -23,6 +23,8 @@ class HeadMetadataTest extends TestCase
     protected function defineEnvironment($app)
     {
         $app['config']->set('app.key', 'base64:'.base64_encode(str_repeat('h', 32)));
+        $app['config']->set('app.locale', 'en');
+        $app['config']->set('app.base_locale', 'it');
         $app['config']->set('uikittemplate.availableLanguages', ['it', 'en', 'fr']);
     }
 
@@ -78,6 +80,7 @@ class HeadMetadataTest extends TestCase
             'it' => 'https://example.test:8443/it/products/42',
             'en' => 'https://example.test:8443/en/products/42',
             'fr' => 'https://example.test:8443/fr/products/42',
+            'x-default' => 'https://example.test:8443/it/products/42',
         ], $this->alternates($document));
     }
 
@@ -139,7 +142,11 @@ class HeadMetadataTest extends TestCase
         $response->assertOk();
         $document = $this->document($response->getContent());
         $this->assertSame('https://controller.test/article', $this->canonical($document));
-        $this->assertSame(['it' => 'https://controller.test/articolo', 'en' => 'https://controller.test/article'], $this->alternates($document));
+        $this->assertSame([
+            'it' => 'https://controller.test/articolo',
+            'en' => 'https://controller.test/article',
+            'x-default' => 'https://controller.test/articolo',
+        ], $this->alternates($document));
         $this->assertCount(1, $document->query('//link[@rel="icon"]'));
         $this->assertSame('image/svg+xml', $document->query('//link[@rel="icon"]')->item(0)->getAttribute('type'));
         $this->assertSame('/controller.svg', $document->query('//link[@rel="icon"]')->item(0)->getAttribute('href'));
@@ -158,7 +165,9 @@ class HeadMetadataTest extends TestCase
         ]);
         $head = app(HeadMetadata::class)->forContext($context);
         $this->assertSame('https://context.test/page', $head->getCanonical());
-        $this->assertSame($context->languageUrls, $head->getHrefLinks());
+        $this->assertSame($context->languageUrls + [
+            'x-default' => $context->languageUrls['it'],
+        ], $head->getHrefLinks());
         $this->assertSame('https://config.test/page', app(HeadMetadata::class)->getCanonical());
 
         $this->app->instance('head.test.context', $context);
@@ -212,13 +221,18 @@ class HeadMetadataTest extends TestCase
             ]));
 
         $this->assertSame([
-            'it' => 'http://localhost/articolo', 'en-US' => 'http://localhost/special',
+            'it' => 'http://localhost/articolo',
+            'en-US' => 'http://localhost/special',
+            'x-default' => 'http://localhost/articolo',
         ], $head->getHrefLinks());
         $this->assertSame('http://localhost/special', $head->getHrefLink('en_US'));
         $this->assertNull($head->getHrefLink('fr'));
 
         $head->setHrefLinks(['fr' => '/nouvel-article']);
-        $this->assertSame(['fr' => 'http://localhost/nouvel-article'], $head->getHrefLinks());
+        $this->assertSame([
+            'fr' => 'http://localhost/nouvel-article',
+            'x-default' => 'http://localhost/nouvel-article',
+        ], $head->getHrefLinks());
         $head->setHrefLinks([]);
         $this->assertSame([], $head->getHrefLinks());
     }
@@ -229,6 +243,22 @@ class HeadMetadataTest extends TestCase
             config(['uikittemplate.availableLanguages' => $languages]);
             $this->assertSame([], app(HeadMetadata::class)->getHrefLinks());
         }
+    }
+
+    public function test_x_default_uses_base_locale_and_can_be_removed_or_overridden(): void
+    {
+        $response = $this->get('https://example.test/en/page');
+        $response->assertOk();
+        $this->assertSame('https://example.test/it/page', $this->alternates($this->document($response->getContent()))['x-default']);
+
+        config(['uikittemplate.head.xDefaultLocale' => 'en']);
+        $this->assertSame('https://example.test/en/page', app(HeadMetadata::class)->getHrefLinks()['x-default']);
+
+        $head = app(HeadMetadata::class)->setHrefLink('x-default', null);
+        $this->assertArrayNotHasKey('x-default', $head->getHrefLinks());
+
+        $head->setHrefLink('x-default', 'https://example.test/choose-language');
+        $this->assertSame('https://example.test/choose-language', $head->getHrefLinks()['x-default']);
     }
 
     public function test_language_prefix_is_added_after_an_application_base_path(): void
