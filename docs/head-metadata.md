@@ -2,7 +2,10 @@
 
 I layout gestionale e frontend usano lo stesso partial
 `uikittemplate-head::metadata` per favicon, touch icon, theme color, canonical,
-alternate di lingua, Open Graph e JSON-LD.
+alternate di lingua, Open Graph e JSON-LD. Gli override Blade di
+`uikit::frontend.layout` / `uikit::frontend.head` devono continuare a includere
+quel partial: è l'unico punto che importa automaticamente `getMetaTags()` da
+`FrontendContext::page`.
 
 ## Configurazione
 
@@ -15,6 +18,7 @@ alternate di lingua, Open Graph e JSON-LD.
     'themeColor' => '#ffffff',
     'canonical' => null,
     'hrefLinks' => null,
+    'xDefaultLocale' => null, // null → app.base_locale → app.locale
 ],
 ```
 
@@ -38,12 +42,21 @@ genera un URL per ciascuna lingua, prefissando il percorso del canonical:
 ```text
 it: https://example.com/it/catalogo/42
 en: https://example.com/en/catalogo/42
+x-default: https://example.com/it/catalogo/42
 ```
 
 Il prefisso lingua già presente viene sostituito quando coincide con un'intera
 prima componente del percorso. Non si generano quindi `/it/en/catalogo/42` né
 `/en/en/catalogo/42`. Anche la lingua base riceve il prefisso. L'eventuale percorso
 di installazione dell'applicazione rimane prima della lingua.
+
+`x-default` viene aggiunto automaticamente quando gli alternate includono la
+lingua di `uikittemplate.head.xDefaultLocale`, oppure in assenza di quella
+chiave `app.base_locale` e poi `app.locale`. Se quella lingua non è tra gli
+alternate, si usa la prima lingua di `availableLanguages` presente nella mappa.
+Un `x-default` già fornito (config, `languageUrls`, `setHrefLinks` o
+`setHrefLink`) non viene sovrascritto; `setHrefLink('x-default', null)` lo
+omite del tutto.
 
 Per slug differenti tra lingue, pagine prive di alcune traduzioni o una lingua
 base senza prefisso, fornire gli URL espliciti. `hrefLinks = []` disattiva i link
