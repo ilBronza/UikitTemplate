@@ -17,6 +17,13 @@ return [
 		'favicon' => null,
 		'touchIcon' => null,
 		'themeColor' => null,
+		// Public brand name used for Open Graph site_name and Organization JSON-LD.
+		'siteName' => null,
+		// Optional Organization JSON-LD extras; name/url come from siteName and the public home URL.
+		'organization' => [
+			'logo' => null,
+			'sameAs' => [],
+		],
 		// Null uses the current absolute URL without query parameters.
 		'canonical' => null,
 		// Null prefixes the canonical path with each available language; [] disables links.
