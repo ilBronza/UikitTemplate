@@ -89,9 +89,29 @@ final class HeadMetadata
 
     public function getFavicon(): ?array
     {
-        return $this->icon($this->value('favicon', [
+        return $this->getFavicons()[0] ?? null;
+    }
+
+    /** @return list<array{path: string, type?: string|null, sizes?: string}> */
+    public function getFavicons(): array
+    {
+        $configured = $this->value('favicon', [
             'path' => config('uikittemplate.favicon.path', '/favicon.png'),
-        ]));
+        ]);
+
+        if ($configured === null) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($this->faviconList($configured) as $icon) {
+            $normalized = $this->icon($icon);
+            if ($normalized !== null) {
+                $items[] = $normalized;
+            }
+        }
+
+        return $items;
     }
 
     public function setTouchIcon(array|string|null $icon): self
@@ -540,11 +560,24 @@ final class HeadMetadata
         return $this->modelMeta = $model->getMetaTags($locale);
     }
 
+    private function faviconList(array|string $configured): array
+    {
+        if (is_string($configured)) {
+            return [$configured];
+        }
+
+        if (array_is_list($configured)) {
+            return $configured;
+        }
+
+        return [$configured];
+    }
+
     private function icon(array|string|null $icon): ?array
     {
         $icon = is_string($icon) ? ['path' => $icon] : $icon;
 
-        if (empty($icon['path'])) {
+        if (! is_array($icon) || empty($icon['path'])) {
             return null;
         }
 

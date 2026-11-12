@@ -4,9 +4,9 @@
 @if($documentTitle !== null)
     <title>{{ $documentTitle }}</title>
 @endif
-@if($favicon = $headMetadata->getFavicon())
-    <link rel="icon" href="{{ $favicon['path'] }}" @if($favicon['type']) type="{{ $favicon['type'] }}" @endif @isset($favicon['sizes']) sizes="{{ $favicon['sizes'] }}" @endisset>
-@endif
+@foreach($headMetadata->getFavicons() as $favicon)
+    <link rel="icon" href="{{ $favicon['path'] }}" @if(!empty($favicon['type'])) type="{{ $favicon['type'] }}" @endif @isset($favicon['sizes']) sizes="{{ $favicon['sizes'] }}" @endisset>
+@endforeach
 @if($touchIcon = $headMetadata->getTouchIcon())
     <link rel="apple-touch-icon" href="{{ $touchIcon['path'] }}" @isset($touchIcon['sizes']) sizes="{{ $touchIcon['sizes'] }}" @endisset>
 @endif
