@@ -198,6 +198,11 @@
 @if(! ($ib_IFRAMED ?? false) && Auth::check())
     {!! app('menu')->render() !!}
     @includeIf('layouts.projectSpecificHeader')
+    @foreach(config('uikittemplate.headerServices', []) as $service)
+        @if(app()->bound($service))
+            {!! app($service)->header() !!}
+        @endif
+    @endforeach
 @endif
 
 @include('formfield::scripts')

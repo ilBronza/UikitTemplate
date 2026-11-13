@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'headerServices' => [
+        \IlBronza\CRUD\ResourceFilters\ResourceFilters::class,
+    ],
 	// 'theme' => env('APP_UIKITTHEME', 'own'),
 
 	'version' => '1.0.1',
