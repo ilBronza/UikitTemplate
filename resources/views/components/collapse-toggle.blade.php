@@ -36,7 +36,7 @@
 		></span>
 	</button>
 
-	<script>
+	<script data-ilbronza-component="collapse-toggle">
 		(() => {
 			const initialize = () => {
 				const button = document.getElementById(@json($element->getCollapseTargetId() . '-toggle'));
@@ -68,24 +68,23 @@
 					return;
 				}
 
-				button.addEventListener('click', () => {
-					window.requestAnimationFrame(() => {
-						const target = targets()[0];
-
-						if (! target)
-							return;
-
-						try {
-							window.sessionStorage.setItem(
-								button.dataset.collapseStateKey,
-								target.classList.contains('uk-hidden') ? 'collapsed' : 'expanded'
-							);
-						}
-						catch (error) {
-							return;
-						}
-					});
-				});
+                // UIkit may finish toggling after the next animation frame.
+                // Persist the completed toggle, not the state observed during click.
+                targets().forEach((target) => target.addEventListener('toggled', (event) => {
+                    if (event.target !== target)
+                        return;
+                    const primary = targets()[0];
+                    if (!primary)
+                        return;
+                    try {
+                        window.sessionStorage.setItem(
+                            button.dataset.collapseStateKey,
+                            primary.classList.contains('uk-hidden') ? 'collapsed' : 'expanded'
+                        );
+                    } catch (error) {
+                        return;
+                    }
+                }));
 			};
 
 			if (document.readyState === 'loading')
