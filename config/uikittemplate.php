@@ -25,6 +25,14 @@ return [
 		'xDefaultLocale' => null,
 	],
 
+	// Browser indicators for pages without CRUD priority.
+	'concurrentUriAppearance' => [
+		'enabled' => true,
+		// Null generates a yellow warning PNG in the browser; accepts the same icon format as head.favicon.
+		'warningFavicon' => null,
+		'warningThemeColor' => '#facc15',
+	],
+
 	// Restrict web requests to administrators and superadmins during maintenance.
 	'onlyAdmin' => env('APP_UIKIT_ONLY_ADMIN', false),
 

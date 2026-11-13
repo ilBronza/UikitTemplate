@@ -217,3 +217,26 @@ Titolo e metadati vengono emessi una sola volta nel documento, anche se il
 partial compatibile `crud::seo.meta` viene incluso insieme al renderer comune.
 Con i layout UikitTemplate registrare il modello prima del rendering del head;
 non occorre aggiungere altri include SEO.
+
+
+## Indicatori di precedenza nel browser
+
+Sulle pagine con controllo CRUD attivo, la vista `uikittemplate::utilities.concurrentUri.scripts` include un client per aggiornare i tag generati da `HeadMetadata`. Quando manca la precedenza, la favicon diventa un triangolo giallo di avviso e `theme-color` diventa `#facc15`. Il recupero della precedenza ripristina tutti i tag originali, inclusi tipi e dimensioni delle icone ed eventuali colori distinti per tema chiaro e scuro. I tag creati soltanto per l'avviso vengono rimossi al ripristino.
+
+La prima verifica mantiene la grafica originale; un nuovo controllo in corso mantiene l'indicatore corrente fino alla risposta. Conflitto, scadenza e indisponibilità della verifica attivano l'avviso. Gli iframe non modificano gli indicatori della scheda principale. CRUD espone lo stato; UikitTemplate ne gestisce la rappresentazione senza cambiare acquisizione o rinnovo della precedenza.
+
+In `config/uikittemplate.php` si può personalizzare:
+
+```php
+'concurrentUriAppearance' => [
+    'enabled' => true,
+    // Null genera una PNG di avviso nel browser, senza richieste aggiuntive.
+    // Accetta anche un percorso o lo stesso array usato da head.favicon.
+    'warningFavicon' => null,
+    'warningThemeColor' => '#facc15',
+],
+```
+
+Il client espone `window.ibHeadMetadata.setFavicon(icon)`, `setThemeColor(color)`, `restoreFavicon()` e `restoreThemeColor()`. I setter JavaScript accettano percorsi e valori null come gli omonimi setter PHP. L'helper viene caricato soltanto quando necessario; nei layout personalizzati si può includere `uikittemplate-head::client`.
+
+`theme-color` è un suggerimento al browser: il colore della singola scheda desktop non è garantito. La favicon rimane l'indicatore principale.
