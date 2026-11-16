@@ -195,6 +195,27 @@ class HeadMetadataTest extends TestCase
         $this->assertSame(['en-US' => 'http://localhost/en-us/page', 'x-default' => 'http://localhost'], $this->alternates($document));
     }
 
+    public function test_multiple_favicons_are_rendered_in_configured_order(): void
+    {
+        config([
+            'uikittemplate.head.favicon' => [
+                ['path' => '/assets/favicon.svg', 'type' => 'image/svg+xml'],
+                ['path' => '/assets/favicon-32x32.png', 'sizes' => '32x32'],
+                ['path' => '/favicon.ico', 'type' => 'image/x-icon', 'sizes' => 'any'],
+            ],
+        ]);
+        $response = $this->get('/page');
+        $response->assertOk();
+        $icons = $this->document($response->getContent())->query('//link[@rel="icon"]');
+        $this->assertCount(3, $icons);
+        $this->assertSame('/assets/favicon.svg', $icons->item(0)->getAttribute('href'));
+        $this->assertSame('image/svg+xml', $icons->item(0)->getAttribute('type'));
+        $this->assertSame('/assets/favicon-32x32.png', $icons->item(1)->getAttribute('href'));
+        $this->assertSame('image/png', $icons->item(1)->getAttribute('type'));
+        $this->assertSame('32x32', $icons->item(1)->getAttribute('sizes'));
+        $this->assertSame('/favicon.ico', $icons->item(2)->getAttribute('href'));
+    }
+
     public function test_single_language_overrides_keep_automatic_links_in_sync_with_later_canonical_changes(): void
     {
         $this->app->instance('head.test.configure', static function (HeadMetadata $head) {

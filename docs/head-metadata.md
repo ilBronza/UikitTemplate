@@ -13,7 +13,12 @@ quel partial: è l'unico punto che importa automaticamente `getMetaTags()` da
 // config/uikittemplate.php
 'availableLanguages' => ['it', 'en'],
 'head' => [
-    'favicon' => ['path' => '/favicon.svg', 'type' => 'image/svg+xml'],
+    'favicon' => [
+        ['path' => '/favicon.svg', 'type' => 'image/svg+xml'],
+        ['path' => '/favicon-32x32.png', 'type' => 'image/png', 'sizes' => '32x32'],
+        ['path' => '/favicon.ico', 'type' => 'image/x-icon', 'sizes' => 'any'],
+    ],
+    // oppure una sola icona: 'favicon' => ['path' => '/favicon.svg', 'type' => 'image/svg+xml'],
     'touchIcon' => ['path' => '/apple-touch-icon.png', 'sizes' => '180x180'],
     'themeColor' => '#ffffff',
     'canonical' => null,
@@ -22,10 +27,11 @@ quel partial: è l'unico punto che importa automaticamente `getMetaTags()` da
 ],
 ```
 
-Le icone accettano anche un semplice percorso; il tipo della favicon viene
-ricavato dall'estensione se non specificato. `head.favicon = null` mantiene
-la configurazione precedente `uikittemplate.favicon.path`, con fallback su
-`/favicon.png`. Touch icon e theme color vengono omessi se non configurati.
+Le icone accettano un percorso, un oggetto `{path, type?, sizes?}` oppure una lista
+di oggetti per SVG + fallback PNG/ICO. Il tipo viene ricavato dall'estensione se
+non specificato. `head.favicon = null` mantiene la configurazione precedente
+`uikittemplate.favicon.path`, con fallback su `/favicon.png`. Touch icon e theme
+color vengono omessi se non configurati.
 
 Senza canonical esplicito si usa l'URL assoluto della richiesta corrente,
 senza query string. Identificativi nel percorso, protocollo, porta e slash finale
